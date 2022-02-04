@@ -1,4 +1,4 @@
-import { Button, Flex, FormLabel, Input, InputGroup, InputLeftAddon, Text, useToast } from '@chakra-ui/react';
+import { Button, Flex, FormLabel, Input, InputGroup, InputLeftAddon, Text, useToast, useMediaQuery } from '@chakra-ui/react';
 import React,{useState} from 'react';
 import axios from 'axios';
 
@@ -23,6 +23,7 @@ function MembershipForm() {
   const [PermanentState, setPermanentState] = useState('');
   const [PermanentPin, setPermanentPin] = useState('');
   const toast = useToast()
+  const [islargerthan600] = useMediaQuery('(min-width: 600px)')
 
   const handleNameChange = (event) =>{
       setName(event.target.value);
@@ -133,7 +134,7 @@ function MembershipForm() {
   return (
       <Flex alignItems='center' justifyContent='center' direction='column' width='100%' padding='2em'>
         <Text>Hoysala Karnataka sangha membership form</Text>
-        <Flex alignItems='center' justifyContent='center' direction='column' width='80%' padding='2em' boxShadow='xs' borderRadius='30px' marginTop='20px' background='#A6E1FA'>
+        <Flex alignItems='center' justifyContent='center' direction='column' width={islargerthan600 ? '80%' : '100%'} padding='2em' boxShadow='xs' borderRadius='30px' marginTop='20px' background='#A6E1FA'>
           <Flex width='100%' alignItems='center' justifyContent='center'>
             <Flex direction='column' width='50%' margin='2px'>
                 <FormLabel htmlFor='name'>Name</FormLabel>
@@ -144,16 +145,16 @@ function MembershipForm() {
                 <Input placeholder='Enter your Aadhar number' type='text' background='#FFF' onChange={handleAadharChange} />
             </Flex>
           </Flex>
-          <Flex width='100%' alignItems='center' justifyContent='center'>
-            <Flex direction='column' width='50%' margin='2px'>
+          <Flex width='100%' alignItems='center' justifyContent='center' direction={islargerthan600 ? 'row':'column'}>
+            <Flex direction='column' width={islargerthan600 ? '50%':'100%'} margin='2px'>
                 <FormLabel htmlFor='age'>Age</FormLabel>
                 <Input placeholder='Enter your age' type='number' background='#FFF' onChange={handleageChange} />
             </Flex>
-            <Flex direction='column' width='50%' margin='2px'>
+            <Flex direction='column' width={islargerthan600 ? '50%':'100%'} margin='2px'>
                 <FormLabel htmlFor='placeofbirth'>Place of Birth</FormLabel>
                 <Input placeholder='Place of birth' type='text' background='#FFF' onChange={handlePlaceofbirthChange} />
             </Flex>
-            <Flex direction='column' width='50%' margin='2px'>
+            <Flex direction='column' width={islargerthan600 ? '50%':'100%'} margin='2px'>
                 <FormLabel htmlFor='gotra'>Gothra</FormLabel>
                 <Input placeholder='Enter your Gothra' type='text' background='#FFF' onChange={handleGothraChange} />
             </Flex>
@@ -225,8 +226,12 @@ function MembershipForm() {
                 <Input placeholder='Enter PIN code' type='text' background='#FFF' onChange={handlePermanentPinChange} />
             </Flex>
           </Flex>
+          <Flex direction='column' width='100%' margin='2px'>
+                <FormLabel htmlFor='pin'>Add Picture</FormLabel>
+                <Input type='file' background='gray.100' />
+          </Flex>
           <Flex width='100%'>
-              <Button onClick={handleSubmitForm} marginTop='10px' width='20%' background='blue.200' >Submit</Button>
+              <Button onClick={handleSubmitForm} marginTop='10px' width='20%' colorScheme='teal' >Submit</Button>
           </Flex>
         </Flex>
       </Flex>
