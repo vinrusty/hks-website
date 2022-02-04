@@ -5,6 +5,9 @@ import Navbar from './Navbar';
 import { Link } from 'react-router-dom';
 
 function Membership() {
+  
+
+  
   return (
       <>
       <Navbar />
@@ -17,7 +20,7 @@ function Membership() {
                         Regsiter for membership
                     </Text>
                 </Flex>
-                <Flex alignItems='center' justifyContent='center' bg='#DCE1E9' height='250px' borderRadius='10px' boxShadow='md'>
+                <Flex as={Link} to='/list-of-members' alignItems='center' justifyContent='center' bg='#DCE1E9' height='250px' borderRadius='10px' boxShadow='md'>
                     <Text fontSize='3xl'>
                         List of members
                     </Text>
