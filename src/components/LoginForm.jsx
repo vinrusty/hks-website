@@ -1,5 +1,6 @@
 import { VStack, Flex, Text, Input, FormLabel, Button, useMediaQuery } from '@chakra-ui/react';
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 function LoginForm() {
 
@@ -21,7 +22,7 @@ function LoginForm() {
                     <FormLabel htmlFor='password'>Password</FormLabel>
                     <Input placeholder='password' type='password' variant='filled' />
                 </Flex>
-                <Button marginTop='20px' width='50%' colorScheme='blue'>Login</Button>
+                <Button as={NavLink} to='/membership' marginTop='20px' width='50%' colorScheme='blue'>Login</Button>
             </Flex>
         </VStack>
         </div>

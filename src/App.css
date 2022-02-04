@@ -6,6 +6,10 @@
   height: 40vmin;
   pointer-events: none;
 }
+.dashboard-wrapper{
+  width: 100%;
+  margin-left: 260px;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
