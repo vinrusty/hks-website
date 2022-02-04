@@ -1,25 +1,36 @@
-import { Flex, SimpleGrid } from '@chakra-ui/react';
+import { Flex, SimpleGrid, Text } from '@chakra-ui/react';
 import React from 'react';
 import Sidebar from './Sidebar';
+import Navbar from './Navbar';
+import { Link } from 'react-router-dom';
 
 function Membership() {
   return (
+      <>
+      <Navbar />
       <Flex>
           <Sidebar />
           <div className='dashboard-wrapper'>
-            <SimpleGrid columns={[2, null, 3]} gap={4} background='#E5E7E6' margin={2} padding={4} height='50vh' borderRadius='10px'>
-                <Flex alignItems='center' justifyContent='center' bg='#B7B5B3' height='200px' borderRadius='10px'>
-                    Regsiter for membership
+            <SimpleGrid columns={[2, null, 3]} gap={4} margin={2} padding={4} borderRadius='10px'>
+                <Flex as={Link} to='/register' alignItems='center' justifyContent='center' bg='#DCE1E9' height='250px' borderRadius='10px'  boxShadow='md'>
+                    <Text fontSize='3xl'>
+                        Regsiter for membership
+                    </Text>
                 </Flex>
-                <Flex alignItems='center' justifyContent='center' bg='#B7B5B3' height='200px' borderRadius='10px'>
-                    List of Members
+                <Flex alignItems='center' justifyContent='center' bg='#DCE1E9' height='250px' borderRadius='10px' boxShadow='md'>
+                    <Text fontSize='3xl'>
+                        List of members
+                    </Text>
                 </Flex>
-                <Flex alignItems='center' justifyContent='center' bg='#B7B5B3' height='200px' borderRadius='10px'>
-                    Punya smarane List
+                <Flex alignItems='center' justifyContent='center' bg='#DCE1E9' height='250px' borderRadius='10px' boxShadow='md'>
+                    <Text fontSize='3xl'>
+                        Punya smarane list
+                    </Text>
                 </Flex>
             </SimpleGrid>
           </div>
       </Flex>
+      </>
   );
 }
 

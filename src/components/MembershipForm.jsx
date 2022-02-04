@@ -132,8 +132,8 @@ function MembershipForm() {
   }
 
   return (
-      <Flex alignItems='center' justifyContent='center' direction='column' width='100%' padding='2em'>
-        <Text>Hoysala Karnataka sangha membership form</Text>
+      <Flex alignItems='center' justifyContent='center' direction='column' width='100%' padding='2em' bgGradient='linear(to-l, #7928CA, #FF0080)'>
+        <Text fontSize='5xl' color='#FFF'>Hoysala Karnataka sangha membership form</Text>
         <Flex alignItems='center' justifyContent='center' direction='column' width={islargerthan600 ? '80%' : '100%'} padding='2em' boxShadow='xs' borderRadius='30px' marginTop='20px' background='#A6E1FA'>
           <Flex width='100%' alignItems='center' justifyContent='center'>
             <Flex direction='column' width='50%' margin='2px'>
