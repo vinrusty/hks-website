@@ -1,16 +1,17 @@
-import { Flex, Text, SimpleGrid } from '@chakra-ui/react';
+import { Flex, Text, SimpleGrid, useMediaQuery } from '@chakra-ui/react';
 import React from 'react';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import { Link } from 'react-router-dom';
 
 function Prefect() {
+    const [islargerthan600] = useMediaQuery('(min-width: 600px)')
   return (
       <>
           <Navbar />
           <Flex>
               <Sidebar />
-              <Flex marginLeft='260px' direction='column' justifyContent='center' width='100%' padding='2em'>
+              <Flex marginLeft={islargerthan600 ? '260px':'0px'} direction='column' justifyContent='center' width='100%' padding='2em'>
               {/* <Table variant='simple'>
                 <TableCaption>Prefect Information</TableCaption>
                 <Thead>
@@ -44,7 +45,7 @@ function Prefect() {
                     </Tr>
                 </Tfoot>
               </Table> */}
-              <SimpleGrid columns={[2, null, 3]} gap={4} margin={2} padding={4} borderRadius='10px'>
+              <SimpleGrid columns={[1, null, 3]} gap={4} margin={2} padding={islargerthan600? '2em':''} borderRadius='10px'>
                 <Flex as={Link} to='/create-prefect' alignItems='center' justifyContent='center' bg='#DCE1E9' height='250px' borderRadius='10px'  boxShadow='md'>
                     <Text fontSize='3xl'>
                         Prefect<br />

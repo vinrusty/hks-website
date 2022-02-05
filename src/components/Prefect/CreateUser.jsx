@@ -1,4 +1,4 @@
-import { Button, Flex, useDisclosure, Input, FormLabel } from '@chakra-ui/react';
+import { Button, Flex, useDisclosure, Input, FormLabel, useMediaQuery } from '@chakra-ui/react';
 import React from 'react';
 import {
     Table,
@@ -25,13 +25,14 @@ import {
 function CreateUser() {
 
     const {isOpen, onOpen, onClose} = useDisclosure();
+    const [islargerthan600] = useMediaQuery('(min-width: 600px)')
 
   return (
       <>
       <Navbar />
-      <Flex>
+      <Flex padding='10px'>
           <Sidebar />
-          <Flex marginLeft='260px' direction='column' justifyContent='center' width='100%' padding='2em'>
+          <Flex marginLeft={islargerthan600 ? '260px':'0px'} direction='column' justifyContent='center' width='100%'>
           <Table variant='simple'>
             <TableCaption>Prefect Information</TableCaption>
             <Thead>
@@ -47,7 +48,8 @@ function CreateUser() {
                 
             </Tbody>
           </Table>
-          <Button onClick={onOpen} width='20%' colorScheme='pink'>Add</Button>
+          <Button onClick={onOpen} width={islargerthan600?'20%':'100%'} colorScheme='pink'>Add</Button>
+          </Flex>
           <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
             <ModalContent>
@@ -68,12 +70,11 @@ function CreateUser() {
                 <ModalFooter>
                 
                 <Flex justifyContent='center' width='100%'>
-                    <Button colorScheme="blue" mr={3} width='50%'>Register</Button>
+                    <Button colorScheme="blue" mr={3} width={islargerthan600?'50%':'100%'}>Register</Button>
                 </Flex>
             </ModalFooter>
         </ModalContent>
       </Modal>
-          </Flex>
 
       </Flex>
       </>

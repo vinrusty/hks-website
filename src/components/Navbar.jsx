@@ -13,7 +13,7 @@ function Navbar() {
   return (
   <div>
     <Flex width='100%' height='60px' bgGradient='linear(to-l, #7928CA, #FF0080)' alignItems='center' justifyContent='center' padding='2em' overflowY='hidden'>
-        <Heading size='md' color='#FFF' overflow='hidden'>Hosyala Karnataka Sangha</Heading>
+        <img src='/images/logo.png' alt='sangha logo' style={{width:'60px'}} />
         <Flex marginLeft='auto'>
         <Box as={NavLink} to='/membership'>
             <Text fontSize={islargerthan600 ? 'xl':'1em'} m={3} color='white'>Home</Text>

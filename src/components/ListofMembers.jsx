@@ -1,4 +1,4 @@
-import { Flex, useMediaQuery } from '@chakra-ui/react';
+import { Flex, useMediaQuery, Text } from '@chakra-ui/react';
 import axios from 'axios';
 import React,{useState, useEffect} from 'react';
 import Navbar from './Navbar';
@@ -55,10 +55,10 @@ console.log(members)
                 members && members.map((member, i) => {
                     return(
                         <Tr key={i}>
-                            <Td>{member._id}</Td>
-                            <Td>{member.name}</Td>
-                            <Td>{member.phone}</Td>
-                            <Td>{member.pin}</Td>
+                            <Td padding='1em'><Text fontSize='xs'>V-167</Text></Td>
+                            <Td padding='1em'><Text fontSize='xs'>{member.name}</Text></Td>
+                            <Td padding='1em'><Text fontSize='xs'>{member.phone}</Text></Td>
+                            <Td padding='1em'><Text fontSize='xs'>{member.pin}</Text></Td>
                         </Tr>
                     )
                 })
