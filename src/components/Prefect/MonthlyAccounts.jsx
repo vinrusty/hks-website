@@ -3,15 +3,6 @@ import Navbar from '../Navbar';
 import Sidebar from '../Sidebar';
 import { Button, Flex, Text, useMediaQuery } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import {
-    Table,
-    Thead,
-    Tbody,
-    Tr,
-    Th,
-    Td,
-    TableCaption,
-  } from '@chakra-ui/react'
 
 function MonthlyAccounts() {
 
@@ -54,7 +45,7 @@ function MonthlyAccounts() {
               
           </tr>
       </table>
-      <Button width='10%' margin='20px' colorScheme='teal'>Create</Button>  
+      <Button width={islargerthan600 ? '10%':'30%'} margin='20px' colorScheme='teal'>Create</Button>  
       </Flex>
       </Flex>
       </div>
