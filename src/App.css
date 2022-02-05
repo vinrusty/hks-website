@@ -15,11 +15,34 @@ body{
 }
 *{
   overflow-x: hidden;
+  font-family: 'Montserrat', sans-serif;
+}
+.prefect-table{
+  margin: 5px;
+  text-align: center;
+  width: 100%;
+}
+.prefect-table-heading{
+  background: blue;
+  color: white;
+  
+}
+.table-items{
+  padding: 2rem;
 }
 @media screen and (max-width:600px){
+  .prefect-table{
+    margin: 5px;
+    text-align: center;
+    width: 100%;
+    font-size: 0.7rem;
+  }
   .dashboard-wrapper{
     width: 100%;
     margin-left: 0px;
+  }
+  .table-items{
+    padding: 1rem;
   }
 }
 

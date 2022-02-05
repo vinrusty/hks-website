@@ -30,10 +30,10 @@ function CreateUser() {
   return (
       <>
       <Navbar />
-      <Flex padding='10px'>
+      <Flex>
           <Sidebar />
           <Flex marginLeft={islargerthan600 ? '260px':'0px'} direction='column' justifyContent='center' width='100%'>
-          <Table variant='simple'>
+          <Table variant='simple' size={islargerthan600 ? 'md':'sm'}>
             <TableCaption>Prefect Information</TableCaption>
             <Thead>
                 <Tr>
@@ -41,7 +41,6 @@ function CreateUser() {
                 <Th>Name</Th>
                 <Th>Phone no.</Th>
                 <Th>User ID</Th>
-                <Th>Actions</Th>
                 </Tr>
             </Thead>
             <Tbody>

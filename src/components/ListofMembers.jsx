@@ -40,7 +40,7 @@ console.log(members)
       <Flex>
         <Sidebar />
         <Flex marginLeft={islargerthan600 ? '260px':'0px'} direction='column' justifyContent='center' width='100%'>
-        <Table variant='simple'>
+        <Table variant='simple' size={islargerthan600 ? 'md':'sm'}>
         <TableCaption>Hoysala karnataka Members</TableCaption>
         <Thead>
             <Tr>
@@ -56,7 +56,7 @@ console.log(members)
                     return(
                         <Tr key={i}>
                             <Td padding='1em'><Text fontSize='xs'>V-167</Text></Td>
-                            <Td padding='1em'><Text fontSize='xs'>{member.name}</Text></Td>
+                            <Td padding='0em'><Text fontSize='xs'>{member.name}</Text></Td>
                             <Td padding='1em'><Text fontSize='xs'>{member.phone}</Text></Td>
                             <Td padding='1em'><Text fontSize='xs'>{member.pin}</Text></Td>
                         </Tr>

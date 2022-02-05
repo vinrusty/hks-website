@@ -52,7 +52,7 @@ function Prefect() {
                         Create User
                     </Text>
                 </Flex>
-                <Flex as={Link} to='/' alignItems='center' justifyContent='center' bg='#DCE1E9' height='250px' borderRadius='10px' boxShadow='md'>
+                <Flex as={Link} to='/prefect/monthly-accounts' alignItems='center' justifyContent='center' bg='#DCE1E9' height='250px' borderRadius='10px' boxShadow='md'>
                     <Text fontSize='3xl'>
                         Prefect<br/>
                         Monthly Accounts
