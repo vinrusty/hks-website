@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, useMediaQuery } from '@chakra-ui/react';
 import axios from 'axios';
 import React,{useState, useEffect} from 'react';
 import Navbar from './Navbar';
@@ -16,6 +16,7 @@ import {
 
 function ListofMembers() {
     const [members, setMembers] = useState([])
+    const [islargerthan600] = useMediaQuery('(min-width: 600px)')
 
     useEffect(() => {
         const fetchData = async() =>{
@@ -38,7 +39,7 @@ console.log(members)
       <Navbar />
       <Flex>
         <Sidebar />
-        <Flex marginLeft='260px' direction='column' justifyContent='center' width='100%' padding='2em'>
+        <Flex marginLeft={islargerthan600 ? '260px':'0px'} direction='column' justifyContent='center' width='100%'>
         <Table variant='simple'>
         <TableCaption>Hoysala karnataka Members</TableCaption>
         <Thead>

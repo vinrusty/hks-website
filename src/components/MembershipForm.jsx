@@ -230,6 +230,29 @@ function MembershipForm() {
                 <FormLabel htmlFor='pin'>Add Picture</FormLabel>
                 <Input type='file' background='gray.100' />
           </Flex>
+          <Flex width='100%' alignItems='center' justifyContent='center' marginTop='10px'>
+            <Flex direction='column' width='50%' margin='2px'>
+                <FormLabel htmlFor='teloffice'>Enter Inroducers name</FormLabel>
+                
+                    
+                    <Input placeholder='Enter introducers name.' type='text' background='#FFF' onChange={handleTelPhoneOfficeChange} />
+                
+            </Flex>
+            <Flex direction='column' width='50%' margin='2px'>
+                <FormLabel htmlFor='telhome'>Membership ID</FormLabel>
+            
+                    
+                    <Input placeholder='Enter membership id.' type='text' background='#FFF' onChange={handleTelPhoneHomeChange} />
+                
+            </Flex>
+          </Flex>
+          <Flex direction='column' width='100%' margin='2px'>
+                <FormLabel htmlFor='pin'>Member Phone no.</FormLabel>
+                <InputGroup>
+                <InputLeftAddon children='+91' />
+                <Input type='text' placeholder='Enter member phone no.' background='gray.100' />
+                </InputGroup>
+          </Flex>
           <Flex width='100%'>
               <Button onClick={handleSubmitForm} marginTop='10px' width='20%' colorScheme='teal' >Submit</Button>
           </Flex>

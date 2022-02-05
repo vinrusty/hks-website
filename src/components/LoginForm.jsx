@@ -7,9 +7,9 @@ function LoginForm() {
     const [islargerthan600] = useMediaQuery('(min-width: 600px)')
 
     return (
-        <div style={{background:"linear-gradient(45deg, blue, purple, skyblue"}}>
-        <VStack padding='2em'>
-            <Flex alignItems='center' justifyContent='center' padding="2em">
+        <div class='login-wrapper'>
+        <Flex direction='column' padding='2em' alignItems='center' justifyContent='center'>
+            <Flex alignItems='center' justifyContent='center' padding="1em">
                 <img src='/images/logo.png' alt='logo' style={{width: "50%"}} />
             </Flex>
             <Flex direction='column' alignItems='center' justifyContent='center' width={islargerthan600 ? '30%':'100%'} background='#FFF' padding='2em' borderRadius='30px'>
@@ -24,7 +24,7 @@ function LoginForm() {
                 </Flex>
                 <Button as={NavLink} to='/membership' marginTop='20px' width='50%' colorScheme='blue'>Login</Button>
             </Flex>
-        </VStack>
+        </Flex>
         </div>
     ); 
       
