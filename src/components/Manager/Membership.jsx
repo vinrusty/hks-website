@@ -1,7 +1,7 @@
 import { Flex, SimpleGrid, Text, useMediaQuery } from '@chakra-ui/react';
 import React from 'react';
-import Sidebar from './Sidebar';
-import Navbar from './Navbar';
+import Sidebar from '../Sidebar';
+import Navbar from '../Navbar';
 import { Link } from 'react-router-dom';
 
 function Membership() {

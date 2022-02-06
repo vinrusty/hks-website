@@ -16,7 +16,7 @@ function MonthlyAccounts() {
       <Flex marginLeft={islargerthan600 ? '260px':'0px'} direction='column' justifyContent='center' width='100%'>
       <table className='prefect-table'>
           <tr className='prefect-table-heading'>
-              <th>Month</th>
+              <th>Month | Year</th>
               <th>Prefect</th>
               <th>Phone</th>
               <th>Expenditure</th>
@@ -24,7 +24,7 @@ function MonthlyAccounts() {
           <tr>
               <td className='table-items'>
               <Link to='/prefect/monthly-account/year-month'>
-              February
+              February 22
               </Link>
               </td>
               <td className='table-items'>

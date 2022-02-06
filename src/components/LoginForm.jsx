@@ -22,7 +22,7 @@ function LoginForm() {
                     <FormLabel htmlFor='password'>Password</FormLabel>
                     <Input placeholder='password' type='password' variant='filled' />
                 </Flex>
-                <Button as={NavLink} to='/membership' marginTop='20px' width='50%' colorScheme='blue'>Login</Button>
+                <Button as={NavLink} to='/dashboard' marginTop='20px' width='50%' colorScheme='blue'>Login</Button>
             </Flex>
         </Flex>
         </div>
