@@ -51,8 +51,14 @@ function Navbar() {
             <Box as={NavLink} to='/dashboard' mt={6}  height="50px" cursor='pointer' onClick={onClose} width="100%">
             <Text fontSize='3xl' color='#FFF' fontWeight='bold' >Membership</Text>
             </Box>
-            <Box as={NavLink} to='/prefect' mt={2} height='50px' cursor='pointer' onClick={onClose} width="100%">
-            <Text fontSize='3xl' color='#FFF' fontWeight='bold' >Create Prefect</Text>
+            <Box as={NavLink} to='/dashboard' mt={6}  height="50px" cursor='pointer' onClick={onClose} width="100%">
+            <Text fontSize='3xl' color='#FFF' fontWeight='bold' >Prefect</Text>
+            </Box>
+            <Box as={NavLink} to='/dashboard' mt={6}  height="50px" cursor='pointer' onClick={onClose} width="100%">
+            <Text fontSize='3xl' color='#FFF' fontWeight='bold' >Student</Text>
+            </Box>
+            <Box as={NavLink} to='/dashboard' mt={6}  height="50px" cursor='pointer' onClick={onClose} width="100%">
+            <Text fontSize='3xl' color='#FFF' fontWeight='bold' >Accounts</Text>
             </Box>
         </Flex>
         </DrawerBody>
