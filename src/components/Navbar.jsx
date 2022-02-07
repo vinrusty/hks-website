@@ -47,9 +47,9 @@ function Navbar() {
         <Flex direction='column' alignItems='center' justifyContent='center' marginTop='50px'>
         <img src='/images/logo.png' alt='sangha logo' style={{width:"70%"}} />
         </Flex>
-        <Flex direction='column' alignItems='center' height='30%' textAlign='center'>
-            <Box as={NavLink} to='/dashboard' mt={6}  height="50px" cursor='pointer' onClick={onClose} width="100%">
-            <Text fontSize='3xl' color='#FFF' fontWeight='bold' >Membership</Text>
+        <Flex direction='column' alignItems='center' height='100%' textAlign='center'>
+            <Box as={NavLink} to='/dashboard' mt={6} height="50px" cursor='pointer' onClick={onClose} width="100%">
+            <Text fontSize='3xl' color='#FFF' fontWeight='bold' >Membership</Text>/
             </Box>
             <Box as={NavLink} to='/prefect' mt={6}  height="50px" cursor='pointer' onClick={onClose} width="100%">
             <Text fontSize='3xl' color='#FFF' fontWeight='bold' >Prefect</Text>
