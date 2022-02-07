@@ -1,24 +1,24 @@
-.dashboard-wrapper{
-  width: 100%;
-  margin-left: 260px;
-}
-.login-wrapper{
-  background:linear-gradient(45deg, blue, purple, skyblue);
-  height: 100vh;
-  overflow: hidden;
-}
 html{
   height: 100%;
 }
 body{
   min-height: 100%;
 }
+.dashboard-wrapper{
+  width: 100%;
+  margin-left: 260px;
+}
+.login-wrapper{
+  background:linear-gradient(45deg, blue, purple, skyblue);
+  /* height: 100vh; */
+  height: 100%;
+  overflow: hidden;
+}
 *{
   overflow-x: hidden;
   font-family: 'Montserrat', sans-serif;
 }
 .prefect-table{
-  margin: 5px;
   text-align: center;
   width: 100%;
 }
@@ -43,6 +43,12 @@ body{
   }
   .table-items{
     padding: 1rem;
+  }
+  .login-wrapper{
+    background:linear-gradient(45deg, blue, purple, skyblue);
+    height: 100vh;
+    /* height: 100%; */
+    overflow: hidden;
   }
 }
 

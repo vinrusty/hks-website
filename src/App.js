@@ -10,6 +10,8 @@ import Member from './components/Manager/Member';
 import MonthlyAccounts from './components/Prefect/MonthlyAccounts';
 import AccountDetails from './components/Prefect/AccountDetails';
 import Students from './components/Students/Students';
+import RationList from './components/Prefect/RationList';
+import MonthlyRationList from './components/Prefect/MonthlyRationList';
 import './App.css';
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
         <Route path='/list-of-members/:id' element={<Member />} />
         <Route path='/prefect/monthly-accounts' element={<MonthlyAccounts />} />
         <Route path='/prefect/monthly-accounts/year-month' element={<AccountDetails />} />
+        <Route path='/prefect/ration-list' element={<RationList />} />
+        <Route path='/prefect/ration-list/month-year' element={<MonthlyRationList />} />
         <Route path='/students' element={<Students />} />
       </Routes>
     </Router>

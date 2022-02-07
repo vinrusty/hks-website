@@ -1,12 +1,28 @@
 import { Flex, SimpleGrid, Text, useMediaQuery } from '@chakra-ui/react';
-import React from 'react';
+import React,{useEffect} from 'react';
 import Sidebar from '../Sidebar';
 import Navbar from '../Navbar';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function Membership() {
   
   const [islargerthan600] = useMediaQuery('(min-width: 600px)')
+
+  useEffect(() => {
+      const fetchUser = async() => {
+        try{
+            const data = await axios.get('http://localhost:3001/dashboard')
+            console.log(data)
+            const fetchedUser = await data.data
+            console.log(fetchedUser)
+        }
+        catch(err){
+
+        }
+      }
+      fetchUser()
+  },[])
   
   return (
       <>

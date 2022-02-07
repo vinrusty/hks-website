@@ -13,8 +13,8 @@ function Sidebar() {
 
     <Box textAlign='center' width="250px" bgGradient='linear(to-l, #7928CA, #FF0080)' height='90%' position="fixed" m={1} borderRadius={10} boxShadow='lg'>
          <Flex direction='column' alignItems='center' height="75%" marginTop='2em'>
-            <Flex mt='auto' alignItems='center' justifyContent='center'>
-                <img src='/images/logo.png' alt='sangha logo' style={{width:"70%"}} />
+            <Flex mt='auto' alignItems='center' justifyContent='center' overflow='hidden'>
+                <img src='/images/logo.png' alt='sangha logo' style={{width:"70%", overflow:'hidden'}} />
             </Flex>
             
             <Box as={NavLink} activeClassName='nav-active' to='/dashboard' mt={6}  height="50px" cursor='pointer'  width="95%" borderRadius={5}>
