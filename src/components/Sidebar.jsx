@@ -12,9 +12,9 @@ function Sidebar() {
       islargerthan600 ?
 
     <Box textAlign='center' width="250px" bgGradient='linear(to-l, #7928CA, #FF0080)' height='90%' position="fixed" m={1} borderRadius={10} boxShadow='lg'>
-         <Flex direction='column' alignItems='center' height="75%" marginTop='2em'>
-            <Flex mt='auto' alignItems='center' justifyContent='center' overflow='hidden'>
-                <img src='/images/logo.png' alt='sangha logo' style={{width:"70%", overflow:'hidden'}} />
+         <Flex direction='column' alignItems='center' height="90%" marginTop='2em'>
+            <Flex alignItems='center' justifyContent='center'>
+                <img src='/images/logo.png' alt='sangha logo' style={{width:"70%"}} />
             </Flex>
             
             <Box as={NavLink} activeClassName='nav-active' to='/dashboard' mt={6}  height="50px" cursor='pointer'  width="95%" borderRadius={5}>
@@ -29,8 +29,11 @@ function Sidebar() {
             <Box as={NavLink} activeClassName='nav-active' to='/accounts' height='50px' cursor='pointer' mt={2} width="95%"  borderRadius={5}>
             <Text m={2} fontSize='xl' fontWeight='bold' color='#FFF'>Accounts</Text>
             </Box>
-            <Flex mt={4} width='100%' mt='auto' alignItems='center' justifyContent='center'>
-            <Button as={NavLink} to='/' m={1} width='100px' colorScheme='blue' width='80%'>Sign Out</Button>
+            <Box as={NavLink} activeClassName='nav-active' to='/junior-prefect' height='50px' cursor='pointer' mt={2} width="95%"  borderRadius={5}>
+            <Text m={2} fontSize='xl' fontWeight='bold' color='#FFF'>Junior Prefect</Text>
+            </Box>
+            <Flex mt={4} width='100%' alignItems='center' justifyContent='center'>
+            <Button as={NavLink} to='/' width='100px' colorScheme='blue' width='80%'>Sign Out</Button>
             </Flex>
             
         </Flex>
