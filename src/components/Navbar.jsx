@@ -60,6 +60,9 @@ function Navbar() {
             <Box as={NavLink} to='/accounts' mt={6}  height="50px" cursor='pointer' onClick={onClose} width="100%">
             <Text fontSize='3xl' color='#FFF' fontWeight='bold' >Accounts</Text>
             </Box>
+            <Box as={NavLink} to='/junior-prefect' mt={6}  height="50px" cursor='pointer' onClick={onClose} width="100%">
+            <Text fontSize='3xl' color='#FFF' fontWeight='bold' >Junior Prefect</Text>
+            </Box>
         </Flex>
         </DrawerBody>
         </DrawerContent>
