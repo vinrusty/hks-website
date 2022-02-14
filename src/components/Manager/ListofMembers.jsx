@@ -31,7 +31,6 @@ function ListofMembers() {
         }
         fetchData()
     },[])
-console.log(members)
 
 
   return (

@@ -13,11 +13,11 @@ function Sidebar() {
 
     <Box textAlign='center' width="250px" bgGradient='linear(to-l, #7928CA, #FF0080)' height='90%' position="fixed" m={1} borderRadius={10} boxShadow='lg'>
          <Flex direction='column' alignItems='center' height="90%" marginTop='2em'>
-            <Flex alignItems='center' justifyContent='center'>
+            <Flex alignItems='center' justifyContent='center' overflow='hidden'>
                 <img src='/images/logo.png' alt='sangha logo' style={{width:"70%"}} />
             </Flex>
             
-            <Box as={NavLink} activeClassName='nav-active' to='/dashboard' mt={6}  height="50px" cursor='pointer'  width="95%" borderRadius={5}>
+            <Box as={NavLink} activeClassName='nav-active' to={`/dashboard`} mt={6}  height="50px" cursor='pointer'  width="95%" borderRadius={5}>
             <Text m={2} fontSize='xl' fontWeight='bold' color='#FFF'>Membership</Text>
             </Box>
             <Box as={NavLink} mt={2} to='/prefect' activeClassName='nav-active' height='50px' cursor='pointer'  width="95%" borderRadius={5}>

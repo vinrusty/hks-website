@@ -14,6 +14,7 @@ import RationList from './components/Prefect/RationList';
 import MonthlyRationList from './components/Prefect/MonthlyRationList';
 import JuniorPrefect from './components/Junior Prefect/JuniorPrefect';
 import DailyAccounts from './components/Junior Prefect/DailyAccounts';
+import PersonalDetails from './components/Students/PersonalDetails';
 import './App.css';
 
 function App() {
@@ -31,10 +32,11 @@ function App() {
         <Route path='/prefect/monthly-accounts' element={<MonthlyAccounts />} />
         <Route path='/prefect/monthly-accounts/year-month' element={<AccountDetails />} />
         <Route path='/prefect/ration-list' element={<RationList />} />
-        <Route path='/prefect/ration-list/month-year' element={<MonthlyRationList />} />
+        <Route path='/prefect/ration-list/:date' element={<MonthlyRationList />} />
         <Route path='/students' element={<Students />} />
         <Route path='/junior-prefect' element={<JuniorPrefect />} />
         <Route path='/junior-prefect/daily-accounts' element={<DailyAccounts />} />
+        <Route path='/students/personal-details' element={<PersonalDetails />} />
       </Routes>
     </Router>
     </div>

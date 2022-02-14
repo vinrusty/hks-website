@@ -20,40 +20,40 @@ function LoginForm() {
         setPassword(event.target.value)
     }
 
-    // const handleSubmitLogin = async() => {
-    //     try{
-    //         const data = await axios.post('http://localhost:3001/login',{
-    //                      name: name,
-    //                      password: password
-    //                     },
-    //                     {
-    //                         headers:{'Content-Type':'application/json'}
-    //                     }
-    //                     )
-    //         const message = await data.data
-    //         if(message === 'success'){
-    //             navigate('/dashboard')
-    //         }
-    //         else{
-    //             toast({
-    //                 title: 'Could not login',
-    //                 description: "Please check your name and password",
-    //                 status: 'error',
-    //                 duration: 3000,
-    //                 isClosable: true,
-    //               })
-    //         }
-    //     }
-    //     catch(err){
-    //         toast({
-    //             title: 'Could not login',
-    //             description: "Please check your name and password",
-    //             status: 'error',
-    //             duration: 3000,
-    //             isClosable: true,
-    //           })
-    //     }
-    // }
+    const handleSubmitLogin = async() => {
+        try{
+            const data = await axios.post('http://localhost:3001/login',{
+                         userid: name,
+                         password: password
+                        },
+                        {
+                            headers:{'Content-Type':'application/json'}
+                        }
+                        )
+            const message = await data.data
+            if(message){
+                navigate(`/dashboard`)
+            }
+            else{
+                toast({
+                    title: 'Could not login',
+                    description: "Please check your name and password",
+                    status: 'error',
+                    duration: 3000,
+                    isClosable: true,
+                  })
+            }
+        }
+        catch(err){
+            toast({
+                title: 'Could not login',
+                description: "Please check your name and password",
+                status: 'error',
+                duration: 3000,
+                isClosable: true,
+              })
+        }
+    }
 
 
     return (
@@ -72,7 +72,7 @@ function LoginForm() {
                     <FormLabel htmlFor='password'>Password</FormLabel>
                     <Input placeholder='password' type='password' variant='filled' onChange={handlePasswordChange} />
                 </Flex>
-                <Button as={NavLink} to='/dashboard' marginTop='20px' width='50%' colorScheme='blue'>Login</Button>
+                <Button marginTop='20px' width='50%' colorScheme='blue' onClick={handleSubmitLogin}>Login</Button>
             </Flex>
         </Flex>
         </div>

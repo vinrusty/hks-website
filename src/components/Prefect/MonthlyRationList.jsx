@@ -1,10 +1,12 @@
-import { Flex, Button, useMediaQuery, useDisclosure, Input, FormLabel } from '@chakra-ui/react';
-import React,{ useState, useRef} from 'react';
+import { Flex, Button, useMediaQuery, useDisclosure, Input, FormLabel, useToast } from '@chakra-ui/react';
+import React,{ useState, useRef, useEffect} from 'react';
 import Navbar from '../Navbar';
 import Sidebar from '../Sidebar';
 import {Drawer,DrawerBody,DrawerHeader,DrawerOverlay,DrawerContent,DrawerCloseButton} from "@chakra-ui/react"
 import {AlertDialog,AlertDialogBody,AlertDialogFooter,AlertDialogHeader,AlertDialogContent,AlertDialogOverlay} from "@chakra-ui/react"
 import { AddIcon, CloseIcon } from '@chakra-ui/icons';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 function MonthlyRationList() {
     const [islargerthan600] = useMediaQuery('(min-width: 600px)')
@@ -15,6 +17,28 @@ function MonthlyRationList() {
     const [rationTags, setRationTags] = useState([])
     const cancelRef = useRef()
     const [Open , setOpen] = useState(false)
+    const { date } = useParams()
+    const toast = useToast()
+
+    useEffect(() => {
+        const fetchData = async() => {
+            try{
+                const data = await axios.get(`http://localhost:3001/create-ration-list/${date}`)
+                const recievedRation = await data.data
+                console.log(recievedRation)
+                if(recievedRation.date){
+                    setRationTags(recievedRation.rationList)
+                }
+                else{
+                    console.log('could not fetch')
+                }
+            }
+            catch(err){
+                console.log('could not fetch')
+            }
+        }
+        fetchData()
+    }, [])
 
     const onClosing = () => setOpen(false)
 
@@ -40,6 +64,37 @@ function MonthlyRationList() {
           return total + Number(item.price);
         }, 0);
     }
+    const handleUpdate = async() => {
+        const currentDate = new Date()
+        try{
+            const data = await axios.put(`http://localhost:3001/create-ration-list/${date}`,{
+                date: currentDate.getDate() + "-" + currentDate.getMonth() + "-" + currentDate.getFullYear(),
+                rationList: rationTags,
+                rationExp: rationExp
+            },{
+                headers: {'Content-Type': 'application/json'}
+            })
+            const updatedRation = await data.data
+            if(updatedRation.date){
+                toast({
+                    title: 'Updated ration list successfully',
+                    description: "",
+                    status: 'success',
+                    duration: 3000,
+                    isClosable: true,
+                })
+            }
+        }
+        catch(err){
+            toast({
+                title: 'could not update the ration list',
+                description: "",
+                status: 'error',
+                duration: 3000,
+                isClosable: true,
+                })
+        }
+    }
 
   return (
     <div>
@@ -53,17 +108,23 @@ function MonthlyRationList() {
                     <th>Quantity</th>
                     <th>Price in Rs</th>
                 </tr>
-                <tr>
-                    <td className='table-items'>
-                    Rice
-                    </td>
-                    <td className='table-items'>
-                    10kg
-                    </td>
-                    <td className='table-items'>
-                    800 Rs
-                    </td>
-                </tr>
+                {
+                    rationTags && rationTags.map((ration, index) => {
+                        return (
+                            <tr key={index}>
+                                <td className='table-items'>
+                                {ration.name}
+                                </td>
+                                <td className='table-items'>
+                                {ration.quantity}
+                                </td>
+                                <td className='table-items'>
+                                {ration.price}
+                                </td>
+                            </tr>
+                        )
+                    })
+                }
             </table>
             <Flex>
             <Button width={islargerthan600 ? '10%':'30%'} margin='2px' colorScheme='teal' onClick={onOpen}>Update</Button>  
@@ -107,8 +168,8 @@ function MonthlyRationList() {
                         return (
                             <Flex mt={4} width="100%" key={index}>
                             <Input data-id={index} value={tag.name} onChange={onChangeNum} name='name' type='text' placeholder='Example Budget' variant='outline'></Input>
-                            <Input data-id={index} value={tag.quantity} onChange={onChangeNum} name='name' type='text' placeholder='Example Budget' variant='outline'></Input>
-                            <Input ml={1} data-id={index} value={tag.price} onChange={onChangeNum}  name='amount' type='number' placeholder='' variant='outline'></Input>
+                            <Input data-id={index} value={tag.quantity} onChange={onChangeNum} name='quantity' type='text' placeholder='Example Budget' variant='outline'></Input>
+                            <Input ml={1} data-id={index} value={tag.price} onChange={onChangeNum}  name='price' type='number' placeholder='' variant='outline'></Input>
                             <Button ml={2} id={index} onClick={() => onClickDelete(index)}><CloseIcon cursor='pointer' /></Button>
                             </Flex>
                         )
@@ -117,7 +178,7 @@ function MonthlyRationList() {
                 </Flex>
                 <Flex>
                 <Button type='submit' width={islargerthan600 ? '10%':'30%'} m={1} onClick={onAdd} colorScheme='blue'>Add</Button>
-                <Button type='submit' width={islargerthan600 ? '10%':'30%'} m={1} colorScheme='blue'>Save</Button>
+                <Button type='submit' width={islargerthan600 ? '10%':'30%'} m={1} colorScheme='blue' onClick={handleUpdate}>Save</Button>
                 </Flex>
                 </DrawerBody>
                 </DrawerContent>

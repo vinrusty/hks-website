@@ -4,15 +4,17 @@ import Sidebar from '../Sidebar';
 import Navbar from '../Navbar';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 function Membership() {
   
   const [islargerthan600] = useMediaQuery('(min-width: 600px)')
+  const { id } = useParams()
 
   useEffect(() => {
       const fetchUser = async() => {
         try{
-            const data = await axios.get('http://localhost:3001/dashboard')
+            const data = await axios.get(`http://localhost:3001/dashboard/${id}`)
             console.log(data)
             const fetchedUser = await data.data
             console.log(fetchedUser)
@@ -31,8 +33,8 @@ function Membership() {
           <Sidebar />
           <div className='dashboard-wrapper'>
             <SimpleGrid columns={[1, null, 3]} gap={4} margin={2} padding={4} borderRadius='10px'>
-                <Flex as={Link} to='/register' alignItems='center' justifyContent='center' bg='#DCE1E9' height='250px' borderRadius='10px'  boxShadow='md'>
-                    <Text fontSize={islargerthan600 ? '3xl':'2xl'}>
+                <Flex padding='2rem' as={Link} to='/register' alignItems='center' justifyContent='center' bg='#DCE1E9' height='250px' borderRadius='10px'  boxShadow='md'>
+                    <Text textAlign='center' fontSize={islargerthan600 ? '3xl':'2xl'}>
                         Regsiter for membership
                     </Text>
                 </Flex>
