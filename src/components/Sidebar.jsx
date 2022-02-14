@@ -17,19 +17,16 @@ function Sidebar() {
                 <img src='/images/logo.png' alt='sangha logo' style={{width:"70%"}} />
             </Flex>
             
-            <Box as={NavLink} activeClassName='nav-active' to={`/dashboard`} mt={6}  height="50px" cursor='pointer'  width="95%" borderRadius={5}>
+            <Box as={NavLink} to={`/dashboard`} mt={6}  height="50px" cursor='pointer'  width="95%" borderRadius={5}>
             <Text m={2} fontSize='xl' fontWeight='bold' color='#FFF'>Membership</Text>
             </Box>
-            <Box as={NavLink} mt={2} to='/prefect' activeClassName='nav-active' height='50px' cursor='pointer'  width="95%" borderRadius={5}>
+            <Box as={NavLink} mt={2} to='/prefect' height='50px' cursor='pointer'  width="95%" borderRadius={5}>
             <Text m={2} fontSize='xl' fontWeight='bold' color='#FFF'>Prefect</Text>
             </Box>
-            <Box as={NavLink} activeClassName='nav-active' to='/students' height='50px' cursor='pointer' mt={2} width="95%"  borderRadius={5}>
+            <Box as={NavLink} to='/students' height='50px' cursor='pointer' mt={2} width="95%"  borderRadius={5}>
             <Text m={2} fontSize='xl' fontWeight='bold' color='#FFF'>Students</Text>
             </Box>
-            <Box as={NavLink} activeClassName='nav-active' to='/accounts' height='50px' cursor='pointer' mt={2} width="95%"  borderRadius={5}>
-            <Text m={2} fontSize='xl' fontWeight='bold' color='#FFF'>Accounts</Text>
-            </Box>
-            <Box as={NavLink} activeClassName='nav-active' to='/junior-prefect' height='50px' cursor='pointer' mt={2} width="95%"  borderRadius={5}>
+            <Box as={NavLink} to='/junior-prefect' height='50px' cursor='pointer' mt={2} width="95%"  borderRadius={5}>
             <Text m={2} fontSize='xl' fontWeight='bold' color='#FFF'>Junior Prefect</Text>
             </Box>
             <Flex mt={4} width='100%' alignItems='center' justifyContent='center'>

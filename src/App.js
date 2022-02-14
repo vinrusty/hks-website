@@ -30,7 +30,7 @@ function App() {
         <Route path='/create-prefect' element={<CreateUser />} />
         <Route path='/list-of-members/:id' element={<Member />} />
         <Route path='/prefect/monthly-accounts' element={<MonthlyAccounts />} />
-        <Route path='/prefect/monthly-accounts/year-month' element={<AccountDetails />} />
+        <Route path='/prefect/monthly-accounts/:id' element={<AccountDetails />} />
         <Route path='/prefect/ration-list' element={<RationList />} />
         <Route path='/prefect/ration-list/:date' element={<MonthlyRationList />} />
         <Route path='/students' element={<Students />} />
