@@ -13,6 +13,10 @@ const bcrypt = require('bcryptjs')
 const session = require('express-session')
 const User = require('./models/Users')
 const Ration = require('./models/Ration')
+const PersonalDetail = require('./models/PersonalDetails')
+const PrefectAccount = require('./models/PrefectAccount')
+const multer = require('multer')
+const uploads = multer({dest: 'uploads/'})
 
 
 dotenv.config()
@@ -55,7 +59,7 @@ app.post('/register', async(req, res) => {
     }
 })
 
-app.post('/create-user', (req, res) => {
+app.post('/create-user', uploads.single("studentImage"), (req, res) => {
     User.findOne({userid: req.body.userid}, async(err, doc) => {
         if(err){
             throw err
@@ -175,8 +179,70 @@ app.get('/create-ration-list/:id', (req, res) => {
     })
 })
 
-app.put('/create-ration-list', async(req, res) => {
+app.put('/create-ration-list/:date', async(req, res) => {
+    const { date } = req.params
+    try{
+        const updatedRation = await Ration.findOneAndUpdate({date: date},req.body)
+        res.json(updatedRation)
+    }
+    catch(err){
+        res.status(400).json("couldn't update")
+    }
+})
 
+app.post('/personal-details', async(req, res) => {
+    const personalDetail = new PersonalDetail(req.body)
+    try{
+        const newPersonalDetail = await personalDetail.save();
+        res.json(newPersonalDetail);
+    }
+    catch(err){
+        res.status(400).json('could not register')
+    }
+})
+app.post('/prefect-account', async(req, res) => {
+    const prefectAccount = new PrefectAccount(req.body)
+    try{
+        const newPrefectAccount = await prefectAccount.save();
+        res.json(newPrefectAccount);
+    }
+    catch(err){
+        res.status(400).json('could not register')
+    }
+})
+app.patch('/prefect-account/:id', async(req, res) => {
+    const {id} = req.params
+    const {accountList} = req.body
+    try{
+        const updatedAccount = await PrefectAccount.findOneAndUpdate({month: id}, {accountList: accountList})
+        res.json(updatedAccount)
+    }
+    catch(err){
+        res.status(400).json('could not add')
+    }
+})
+app.get('/prefect-account/:id', (req, res) => {
+    const {id} = req.params
+    PrefectAccount.findOne({month: id}, (err, account) => {
+        if(err){
+            throw err
+        }
+        if(!account){
+            res.status(400).json('no account found')
+        }
+        else{
+            res.json(account)
+        }
+    })
+})
+app.get('/prefect-account', async(req, res) => {
+    try{
+        const accounts = await PrefectAccount.find({});
+        res.json(accounts);
+    }
+    catch(err){
+        res.status(400).json('could not fetch accounts')
+    }
 })
 
 app.listen('3001', ()=>{
