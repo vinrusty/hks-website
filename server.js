@@ -212,9 +212,10 @@ app.post('/prefect-account', async(req, res) => {
 })
 app.patch('/prefect-account/:id', async(req, res) => {
     const {id} = req.params
-    const {accountList} = req.body
     try{
-        const updatedAccount = await PrefectAccount.findOneAndUpdate({month: id}, {accountList: accountList})
+        const updatedAccount = await PrefectAccount.findOne({month: id})
+        Object.assign(updatedAccount, req.body)
+        updatedAccount.save()
         res.json(updatedAccount)
     }
     catch(err){
@@ -245,6 +246,9 @@ app.get('/prefect-account', async(req, res) => {
     }
 })
 
+// app.listen(process.env.PORT, ()=>{
+//     console.log(`listening at ${process.env.PORT}`)
+// })
 app.listen('3001', ()=>{
-    console.log('listening at 3001')
+    console.log(`listening at 3001`)
 })
