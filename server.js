@@ -46,6 +46,10 @@ app.use(passport.initialize())
 app.use(passport.session())
 require('./passportConfig')(passport)
 
+app.get('/', (req,res)=>{
+    res.send('hello')
+})
+
 app.post('/register', async(req, res) => {
     const member = new Member(req.body)
     try{
