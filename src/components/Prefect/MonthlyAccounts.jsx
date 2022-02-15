@@ -6,7 +6,7 @@ import {AlertDialog,AlertDialogBody,AlertDialogFooter,AlertDialogHeader,AlertDia
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-function MonthlyAccounts() {
+function MonthlyAccounts({url}) {
 
     const [islargerthan600] = useMediaQuery('(min-width: 600px)')
     const [Open , setOpen] = useState(false)
@@ -20,7 +20,7 @@ function MonthlyAccounts() {
     useEffect(() => {
         const fetchData = async() => {
             try{
-                const data = await axios.get('http://localhost:3001/prefect-account')
+                const data = await axios.get(url+'/prefect-account')
                 const fetchedAccount = await data.data
                 setAccounts(fetchedAccount)
             }
@@ -46,7 +46,7 @@ function MonthlyAccounts() {
     const handleSubmitForm = async() => {
         const date = new Date()
         try{
-            const data = await axios.post('http://165.232.181.164:3001/prefect-account',{
+            const data = await axios.post(url+'/prefect-account',{
                 name: name,
                 phone: phone,
                 month: month + "-" + date.getFullYear()

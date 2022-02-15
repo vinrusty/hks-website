@@ -2,7 +2,7 @@ import { Button, Flex, FormLabel, Input, InputGroup, InputLeftAddon, Text, useTo
 import React,{useState} from 'react';
 import axios from 'axios';
 
-function MembershipForm() {
+function MembershipForm({url}) {
   
   const [name, setName] = useState('');
   const [aadhar, setAadhar] = useState('');
@@ -82,7 +82,7 @@ function MembershipForm() {
 
   const handleSubmitForm = async() =>{
     try{
-        const data = await axios.post("http://165.232.181.164:3001/register",
+        const data = await axios.post(url+"/register",
         {
             name: name,
             aadhar_no: aadhar,

@@ -18,25 +18,28 @@ import PersonalDetails from './components/Students/PersonalDetails';
 import './App.css';
 
 function App() {
+
+  const URL = 'https://rocky-reef-88825.herokuapp.com/'
+
   return (
     <div>
     <Router>
       <Routes>
-        <Route path='/' element={<LoginForm />} />
-        <Route path='/register' element={<MembershipForm />} />
-        <Route path='/dashboard' element={<Membership />} />
-        <Route path='/list-of-members' element={<ListofMembers />} />
-        <Route path='/prefect' element={<Prefect />} />
-        <Route path='/create-prefect' element={<CreateUser />} />
-        <Route path='/list-of-members/:id' element={<Member />} />
-        <Route path='/prefect/monthly-accounts' element={<MonthlyAccounts />} />
-        <Route path='/prefect/monthly-accounts/:id' element={<AccountDetails />} />
-        <Route path='/prefect/ration-list' element={<RationList />} />
-        <Route path='/prefect/ration-list/:date' element={<MonthlyRationList />} />
-        <Route path='/students' element={<Students />} />
+        <Route path='/' element={<LoginForm url={URL} />} />
+        <Route path='/register' element={<MembershipForm url={URL} />} />
+        <Route path='/dashboard' element={<Membership url={URL} />} />
+        <Route path='/list-of-members' element={<ListofMembers url={URL} />} />
+        <Route path='/prefect' element={<Prefect url={URL} />} />
+        <Route path='/create-prefect' element={<CreateUser url={URL} />} />
+        <Route path='/list-of-members/:id' element={<Member url={URL} />} />
+        <Route path='/prefect/monthly-accounts' element={<MonthlyAccounts url={URL} />} />
+        <Route path='/prefect/monthly-accounts/:id' element={<AccountDetails url={URL} />} />
+        <Route path='/prefect/ration-list' element={<RationList url={URL} />} />
+        <Route path='/prefect/ration-list/:date' element={<MonthlyRationList url={URL} />} />
+        <Route path='/students' element={<Students url={URL} />} />
         <Route path='/junior-prefect' element={<JuniorPrefect />} />
-        <Route path='/junior-prefect/daily-accounts' element={<DailyAccounts />} />
-        <Route path='/students/personal-details' element={<PersonalDetails />} />
+        <Route path='/junior-prefect/daily-accounts' element={<DailyAccounts url={URL} />} />
+        <Route path='/students/personal-details' element={<PersonalDetails url={URL} />} />
       </Routes>
     </Router>
     </div>

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-function Membership() {
+function Membership({url}) {
   
   const [islargerthan600] = useMediaQuery('(min-width: 600px)')
   const { id } = useParams()
@@ -14,7 +14,7 @@ function Membership() {
   useEffect(() => {
       const fetchUser = async() => {
         try{
-            const data = await axios.get(`http://165.232.181.164:3001/dashboard/${id}`)
+            const data = await axios.get(url+`/dashboard/${id}`)
             console.log(data)
             const fetchedUser = await data.data
             console.log(fetchedUser)

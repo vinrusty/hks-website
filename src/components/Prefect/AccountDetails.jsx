@@ -5,7 +5,7 @@ import { Flex, useMediaQuery, Button, Input, FormLabel } from '@chakra-ui/react'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-function AccountDetails() {
+function AccountDetails({url}) {
 
   const {id} = useParams()
     
@@ -28,7 +28,7 @@ function AccountDetails() {
     useEffect(() => {
       const fetchData = async() => {
         try{
-          const data = await axios.get(`http://165.232.181.164:3001/prefect-account/${id}`)
+          const data = await axios.get(url+`/prefect-account/${id}`)
           const fetchedData = await data.data
           setAccount({accountList: fetchedData.accountList})
         }
@@ -75,7 +75,7 @@ function AccountDetails() {
         accountList:[...account.accountList, accounts]
       })
       try{
-        const data = await axios.patch(`http://165.232.181.164:3001/prefect-account/${id}`,{
+        const data = await axios.patch(url+`/prefect-account/${id}`,{
           accountList: [...account.accountList, accounts]
         },
         {

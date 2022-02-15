@@ -22,7 +22,7 @@ import {
     ModalCloseButton,
   } from "@chakra-ui/react"
 
-function CreateUser() {
+function CreateUser({url}) {
 
     const {isOpen, onOpen, onClose} = useDisclosure();
     const [islargerthan600] = useMediaQuery('(min-width: 600px)')

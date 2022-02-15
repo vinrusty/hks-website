@@ -8,7 +8,7 @@ import { AddIcon, CloseIcon } from '@chakra-ui/icons';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-function MonthlyRationList() {
+function MonthlyRationList({url}) {
     const [islargerthan600] = useMediaQuery('(min-width: 600px)')
     const {isOpen, onOpen, onClose} = useDisclosure();
     const [rationName, setRationName] = useState('')
@@ -23,7 +23,7 @@ function MonthlyRationList() {
     useEffect(() => {
         const fetchData = async() => {
             try{
-                const data = await axios.get(`http://165.232.181.164:3001/create-ration-list/${date}`)
+                const data = await axios.get(url+`/create-ration-list/${date}`)
                 const recievedRation = await data.data
                 console.log(recievedRation)
                 if(recievedRation.date){
@@ -67,7 +67,7 @@ function MonthlyRationList() {
     const handleUpdate = async() => {
         const currentDate = new Date()
         try{
-            const data = await axios.put(`http://165.232.181.164:3001/create-ration-list/${date}`,{
+            const data = await axios.put(url+`/create-ration-list/${date}`,{
                 date: currentDate.getDate() + "-" + currentDate.getMonth() + "-" + currentDate.getFullYear(),
                 rationList: rationTags,
                 rationExp: rationExp
