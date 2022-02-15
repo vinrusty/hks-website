@@ -244,9 +244,9 @@ app.get('/prefect-account', async(req, res) => {
     }
 })
 
-// app.listen(process.env.PORT, ()=>{
-//     console.log(`listening at ${process.env.PORT}`)
-// })
-app.listen('3001', ()=>{
-    console.log(`listening at 3001`)
+app.listen(process.env.PORT, ()=>{
+    console.log(`listening at ${process.env.PORT}`)
 })
+// app.listen('3001', ()=>{
+//     console.log(`listening at 3001`)
+// })
