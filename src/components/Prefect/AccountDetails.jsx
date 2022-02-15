@@ -1,27 +1,36 @@
 import React,{useState, useEffect} from 'react';
 import Navbar from '../Navbar';
 import Sidebar from '../Sidebar';
-import { Flex, Text, useMediaQuery, Button, Input, FormLabel, useSafeLayoutEffect } from '@chakra-ui/react';
+import { Flex, useMediaQuery, Button, Input, FormLabel } from '@chakra-ui/react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 function AccountDetails() {
 
   const {id} = useParams()
+    
+    const initialState = {
+      date: '',
+      amount: 0,
+      milk: 0,
+      vegetables: 0,
+      others: 0,
+      total: 0,
+      balance: 0
+    }
 
     const [islargerthan600] = useMediaQuery('(min-width: 600px)')
-    const [amount, setAmount] = useState(0)
-    const [milk, setMilk] = useState(0)
-    const [veg, setVeg] = useState(0)
-    const [others, setOthers] = useState(0)
-    const [account, setAccounts] = useState([])
+    const [accounts, setAccounts] = useState(initialState)
+    const [account, setAccount] = useState({
+      accountList: []
+    })
 
     useEffect(() => {
       const fetchData = async() => {
         try{
-          const data = await axios.get(`http://localhost:3001/prefect-account/${id}`)
+          const data = await axios.get(`http://165.232.181.164:3001/prefect-account/${id}`)
           const fetchedData = await data.data
-          setAccounts(fetchedData)
+          setAccount({accountList: fetchedData.accountList})
         }
         catch(err){
           console.log(err)
@@ -30,56 +39,51 @@ function AccountDetails() {
       fetchData()
     },[])
 
-    
+    console.log(account)
 
     const handleAmountChange = (event) => {
-      setAmount(event.target.value)
+      const date = new Date()
+      setAccounts({
+        ...accounts,
+        date: date.getDate() + '-' + date.getMonth() + '-' + date.getFullYear(),
+        amount: event.target.value
+      })
     }
     const handleMilkChange = (event) => {
-      setMilk(event.target.value)
+      setAccounts({
+        ...accounts,
+        milk: event.target.value
+      })
     }
     const handleVegChange = (event) => {
-      setVeg(event.target.value)
+      setAccounts({
+        ...accounts,
+        vegetables: event.target.value
+      })
     }
     const handleOthersChange = (event) => {
-      setOthers(event.target.value)
+      setAccounts({
+        ...accounts,
+        others: event.target.value,
+        total: Number(accounts.milk) + Number(accounts.vegetables) + Number(accounts.others),
+        balance: Number(accounts.amount) - accounts.total
+      })
     }
-
-    const getTotal = () =>{
-      return Number(milk)+Number(veg)+Number(others)
-    }
-    const date = new Date()
-    // let array  = [
-    //   {
-    //     date: date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear(),
-    //     amount: amount,
-    //     milk: milk,
-    //     vegetables: veg,
-    //     others: others,
-    //     total: getTotal(),
-    //     balance: amount - getTotal()
-    //   }
-      
-    // ]
-    // console.log(amount)
-    // console.log(milk)
 
     const handleSubmitForm = async() => {
+      setAccount({
+        accountList:[...account.accountList, accounts]
+      })
       try{
-        const data = await axios.patch(`http://localhost:3001/prefect-account/${id}`,{
-          accountList: [...account.accountList, {
-            date: date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear(),
-            amount: amount,
-            milk: milk,
-            vegetables: veg,
-            others: others,
-            total: getTotal(),
-            balance: amount - getTotal()
-          }]
+        const data = await axios.patch(`http://165.232.181.164:3001/prefect-account/${id}`,{
+          accountList: [...account.accountList, accounts]
+        },
+        {
+          headers: {'Content-Type': 'application/json'}
         }
         )
-        const fetchedAccount = await data.data
-        console.log(fetchedAccount)
+        const updatedData = await data.data
+        console.log(updatedData)
       }
       catch(err){
         console.log(err)
@@ -112,7 +116,8 @@ function AccountDetails() {
       </Flex>
       </Flex>
       <Button width={islargerthan600 ? '10%':'30%'} margin='20px' colorScheme='teal' onClick={handleSubmitForm}>Add</Button>
-      <table style={{textAlign: 'center'}}>
+      <table style={{textAlign: 'center', overflowX: 'auto'}}>
+      <thead>
         <tr>
           <th>Date</th>
           <th>Amount</th>
@@ -122,10 +127,12 @@ function AccountDetails() {
           <th>Total</th>
           <th>balance</th>
         </tr>
+      </thead>
+      <tbody>
         {
           account.accountList && account.accountList.map((acc, index) => {
-            return(
-              <tr>
+            return (
+              <tr key={index}>
                 <td>{acc.date}</td>
                 <td>{acc.amount}</td>
                 <td>{acc.milk}</td>
@@ -137,6 +144,7 @@ function AccountDetails() {
             )
           })
         }
+      </tbody>
       </table>
       </Flex>
       </Flex>

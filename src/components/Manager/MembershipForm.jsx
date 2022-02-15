@@ -82,7 +82,7 @@ function MembershipForm() {
 
   const handleSubmitForm = async() =>{
     try{
-        const data = await axios.post("http://localhost:3001/register",
+        const data = await axios.post("http://165.232.181.164:3001/register",
         {
             name: name,
             aadhar_no: aadhar,

@@ -17,7 +17,7 @@ function PersonalDetails() {
 
     const handleSumbitForm = async() => {
         try{
-            const data = await axios.post('http://localhost:3001/personal-details',
+            const data = await axios.post('http://165.232.181.164:3001/personal-details',
             {
                 fatherName: fname,
                 motherName: mname,

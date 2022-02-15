@@ -46,7 +46,7 @@ function MonthlyAccounts() {
     const handleSubmitForm = async() => {
         const date = new Date()
         try{
-            const data = await axios.post('http://localhost:3001/prefect-account',{
+            const data = await axios.post('http://165.232.181.164:3001/prefect-account',{
                 name: name,
                 phone: phone,
                 month: month + "-" + date.getFullYear()

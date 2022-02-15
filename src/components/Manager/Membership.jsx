@@ -14,7 +14,7 @@ function Membership() {
   useEffect(() => {
       const fetchUser = async() => {
         try{
-            const data = await axios.get(`http://localhost:3001/dashboard/${id}`)
+            const data = await axios.get(`http://165.232.181.164:3001/dashboard/${id}`)
             console.log(data)
             const fetchedUser = await data.data
             console.log(fetchedUser)
