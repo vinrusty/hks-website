@@ -103,18 +103,18 @@ app.post('/login', (req, res, next) => {
     })(req, res, next)
 })
 
-app.get('/dashboard/:id',(req, res) => {
-    const {id} = req.params
-    User.findOne({userid: id}, (err, user)=>{
-        if(err) throw err;
-        if(!user){
-            res.status(403).json('no user exists')
-        }
-        if(user){
-            res.json(user)
-        }
-    })
-})
+// app.get('/dashboard/:id',(req, res) => {
+//     const {id} = req.params
+//     User.findOne({userid: id}, (err, user)=>{
+//         if(err) throw err;
+//         if(!user){
+//             res.status(403).json('no user exists')
+//         }
+//         if(user){
+//             res.json(user)
+//         }
+//     })
+// })
 
 app.post('/create-prefect', async(req, res) => {
     const prefect = new Prefect(req.body)
