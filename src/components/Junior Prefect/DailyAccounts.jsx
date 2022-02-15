@@ -108,7 +108,7 @@ function DailyAccounts() {
                         return (
                             <Flex mt={4} width="100%" key={index}>
                             <Input data-id={index} value={tag.name} onChange={onChangeNum} name='name' type='text' placeholder='Vegetable name' variant='outline'></Input>
-                            <Input data-id={index} value={tag.quantity} onChange={onChangeNum} name='name' type='text' placeholder='Quantity' variant='outline'></Input>
+                            <Input data-id={index} value={tag.quantity} onChange={onChangeNum} name='quantity' type='text' placeholder='Quantity' variant='outline'></Input>
                             <Input ml={1} data-id={index} value={tag.price} onChange={onChangeNum}  name='amount' type='number' placeholder='' variant='outline'></Input>
                             <Button ml={2} id={index} onClick={() => onClickDelete(index)}><CloseIcon cursor='pointer' /></Button>
                             </Flex>

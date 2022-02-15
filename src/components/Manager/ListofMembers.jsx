@@ -21,7 +21,7 @@ function ListofMembers() {
     useEffect(() => {
         const fetchData = async() =>{
             try{
-                const data = await axios.get('https://hks-website.herokuapp.com/list-of-members')
+                const data = await axios.get('http://165.232.181.164:3001/list-of-members')
                 const fetchedMembers = await data.data
                 setMembers(fetchedMembers)
             }
