@@ -23,7 +23,7 @@ function MonthlyRationList({url}) {
     useEffect(() => {
         const fetchData = async() => {
             try{
-                const data = await axios.get(url+`/create-ration-list/${date}`)
+                const data = await axios.get(url+`create-ration-list/${date}`)
                 const recievedRation = await data.data
                 console.log(recievedRation)
                 if(recievedRation.date){
@@ -67,7 +67,7 @@ function MonthlyRationList({url}) {
     const handleUpdate = async() => {
         const currentDate = new Date()
         try{
-            const data = await axios.put(url+`/create-ration-list/${date}`,{
+            const data = await axios.put(url+`create-ration-list/${date}`,{
                 date: currentDate.getDate() + "-" + currentDate.getMonth() + "-" + currentDate.getFullYear(),
                 rationList: rationTags,
                 rationExp: rationExp

@@ -37,7 +37,7 @@ function App() {
         <Route path='/prefect/ration-list' element={<RationList url={URL} />} />
         <Route path='/prefect/ration-list/:date' element={<MonthlyRationList url={URL} />} />
         <Route path='/students' element={<Students url={URL} />} />
-        <Route path='/junior-prefect' element={<JuniorPrefect />} />
+        <Route path='/junior-prefect' element={<JuniorPrefect url={URL} />} />
         <Route path='/junior-prefect/daily-accounts' element={<DailyAccounts url={URL} />} />
         <Route path='/students/personal-details' element={<PersonalDetails url={URL} />} />
       </Routes>

@@ -7,7 +7,7 @@ import { AddIcon, CloseIcon } from '@chakra-ui/icons';
 import {Drawer,DrawerBody,DrawerHeader,DrawerOverlay,DrawerContent,DrawerCloseButton} from "@chakra-ui/react"
 import axios from 'axios';
 
-function RationList() {
+function RationList({url}) {
     const [islargerthan600] = useMediaQuery('(min-width: 600px)')
     const {isOpen, onOpen, onClose} = useDisclosure();
     const [rationName, setRationName] = useState('')
@@ -44,7 +44,7 @@ function RationList() {
     useEffect(() => {
         const fetchData = async() =>{
             try{
-                const data = await axios.get('http://165.232.181.164:3001/create-ration-list')
+                const data = await axios.get(url+'create-ration-list')
                 const fetchedRation = await data.data
                 setRation(fetchedRation)
             }
@@ -58,7 +58,7 @@ function RationList() {
     const handleRationSubmitForm = async() =>{
         const currentDate = new Date()
         try{
-            const data = await axios.post('http://165.232.181.164:3001/create-ration-list', {
+            const data = await axios.post(url+'create-ration-list', {
                 date: currentDate.getDate() + "-" + currentDate.getMonth() + "-" + currentDate.getFullYear(),
                 rationList: rationTags,
                 rationExp: rationExp

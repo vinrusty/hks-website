@@ -20,7 +20,7 @@ function MonthlyAccounts({url}) {
     useEffect(() => {
         const fetchData = async() => {
             try{
-                const data = await axios.get(url+'/prefect-account')
+                const data = await axios.get(url+'prefect-account')
                 const fetchedAccount = await data.data
                 setAccounts(fetchedAccount)
             }
@@ -46,7 +46,7 @@ function MonthlyAccounts({url}) {
     const handleSubmitForm = async() => {
         const date = new Date()
         try{
-            const data = await axios.post(url+'/prefect-account',{
+            const data = await axios.post(url+'prefect-account',{
                 name: name,
                 phone: phone,
                 month: month + "-" + date.getFullYear()

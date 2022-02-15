@@ -11,20 +11,20 @@ function Membership({url}) {
   const [islargerthan600] = useMediaQuery('(min-width: 600px)')
   const { id } = useParams()
 
-  useEffect(() => {
-      const fetchUser = async() => {
-        try{
-            const data = await axios.get(url+`/dashboard/${id}`)
-            console.log(data)
-            const fetchedUser = await data.data
-            console.log(fetchedUser)
-        }
-        catch(err){
+//   useEffect(() => {
+//       const fetchUser = async() => {
+//         try{
+//             const data = await axios.get(url+`dashboard/${id}`)
+//             console.log(data)
+//             const fetchedUser = await data.data
+//             console.log(fetchedUser)
+//         }
+//         catch(err){
 
-        }
-      }
-      fetchUser()
-  },[])
+//         }
+//       }
+//       fetchUser()
+//   },[])
   
   return (
       <>

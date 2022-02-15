@@ -82,7 +82,7 @@ function MembershipForm({url}) {
 
   const handleSubmitForm = async() =>{
     try{
-        const data = await axios.post(url+"/register",
+        const data = await axios.post(url+"register",
         {
             name: name,
             aadhar_no: aadhar,

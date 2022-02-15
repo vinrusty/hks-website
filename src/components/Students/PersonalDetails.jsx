@@ -4,7 +4,7 @@ import React,{ useState } from 'react'
 import Navbar from '../Navbar'
 import Sidebar from '../Sidebar'
 
-function PersonalDetails() {
+function PersonalDetails({url}) {
     const [islargerthan600] = useMediaQuery('(min-width: 600px)')
     const [fname, setFname] = useState('')
     const [mname, setMname] = useState('')
@@ -17,7 +17,7 @@ function PersonalDetails() {
 
     const handleSumbitForm = async() => {
         try{
-            const data = await axios.post('http://165.232.181.164:3001/personal-details',
+            const data = await axios.post(url+'personal-details',
             {
                 fatherName: fname,
                 motherName: mname,

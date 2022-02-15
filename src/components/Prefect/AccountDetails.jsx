@@ -28,7 +28,7 @@ function AccountDetails({url}) {
     useEffect(() => {
       const fetchData = async() => {
         try{
-          const data = await axios.get(url+`/prefect-account/${id}`)
+          const data = await axios.get(url+`prefect-account/${id}`)
           const fetchedData = await data.data
           setAccount({accountList: fetchedData.accountList})
         }
@@ -75,7 +75,7 @@ function AccountDetails({url}) {
         accountList:[...account.accountList, accounts]
       })
       try{
-        const data = await axios.patch(url+`/prefect-account/${id}`,{
+        const data = await axios.patch(url+`prefect-account/${id}`,{
           accountList: [...account.accountList, accounts]
         },
         {
