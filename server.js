@@ -15,6 +15,7 @@ const User = require('./models/Users')
 const Ration = require('./models/Ration')
 const PersonalDetail = require('./models/PersonalDetails')
 const PrefectAccount = require('./models/PrefectAccount')
+const JuniorPrefectAccount = require('./models/JuniorPrefectAccount')
 const multer = require('multer')
 const uploads = multer({dest: 'uploads/'})
 
@@ -245,6 +246,17 @@ app.get('/prefect-account', async(req, res) => {
     }
     catch(err){
         res.status(400).json('could not fetch accounts')
+    }
+})
+
+app.post('/junior-prefect/daily-accounts', async(req, res) => {
+    const newJuniorPrefectAccount = new JuniorPrefectAccount(req.body)
+    try{
+        const jpaccount = await newJuniorPrefectAccount.save()
+        res.json(jpaccount)
+    }
+    catch(err){
+        res.status(400).json("could not create!")
     }
 })
 
