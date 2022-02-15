@@ -61,7 +61,7 @@ app.post('/register', async(req, res) => {
     }
 })
 
-app.post('/create-user', uploads.single("studentImage"), (req, res) => {
+app.post('/create-user', (req, res) => {
     User.findOne({userid: req.body.userid}, async(err, doc) => {
         if(err){
             throw err
