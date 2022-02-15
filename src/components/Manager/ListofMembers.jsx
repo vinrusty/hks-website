@@ -21,7 +21,7 @@ function ListofMembers({url}) {
     useEffect(() => {
         const fetchData = async() =>{
             try{
-                const data = await axios.get(url+'/list-of-members')
+                const data = await axios.get(url+'list-of-members')
                 const fetchedMembers = await data.data
                 setMembers(fetchedMembers)
             }
