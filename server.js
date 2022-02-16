@@ -38,7 +38,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost:3000' || 'https://hks-website-7f1d3.web.app/'
+    origin: 'http://localhost:3000' || 'https://hks-website-7f1d3.web.app/',
 }))
 app.use(session({
     secret: 'secretcode',
@@ -52,6 +52,11 @@ require('./passportConfig')(passport)
 
 app.get('/', (req,res)=>{
     res.send('hello')
+    res.setHeader("Access-Control-Allow-Origin", "*")
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Access-Control-Max-Age", "1800");
+    res.setHeader("Access-Control-Allow-Headers", "content-type");
+    res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS")
 })
 
 app.post('/register', async(req, res) => {
