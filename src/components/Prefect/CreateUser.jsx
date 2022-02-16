@@ -1,5 +1,5 @@
-import { Button, Flex, useDisclosure, Input, FormLabel, useMediaQuery } from '@chakra-ui/react';
-import React from 'react';
+import { Button, Flex, useDisclosure, Input, FormLabel, useMediaQuery, useToast } from '@chakra-ui/react';
+import React,{useState} from 'react';
 import {
     Table,
     Thead,
@@ -21,11 +21,75 @@ import {
     ModalBody,
     ModalCloseButton,
   } from "@chakra-ui/react"
+import axios from 'axios';
 
 function CreateUser({url}) {
 
     const {isOpen, onOpen, onClose} = useDisclosure();
     const [islargerthan600] = useMediaQuery('(min-width: 600px)')
+    const [name, setName] = useState('')
+    const [phone, setPhone] = useState('')
+    const [userid, setUserid] = useState('')
+    const [password, setPassword] = useState('')
+    const [prefect, setPrefect] = useState({})
+    const toast = useToast()
+
+    const handleNameChange = (event) => {
+        setName(event.target.value)
+    }
+    const handlePhoneChange = (event) => {
+        setPhone(event.target.value)
+    }
+    const handleUseridChange = (event) => {
+        setUserid(event.target.value)
+    }
+    const handlePasswordChange = (event) => {
+        setPassword(event.target.value)
+    }
+
+    const handleSubmitForm = async() => {
+        try{
+            const data = await axios.post(url+'create-user',{
+                name: name,
+                userid: userid,
+                phone: phone,
+                password: password,
+                role: "prefect"
+            },
+            {
+                headers: {'Content-Type':'application/json'}
+            })
+            const fetchedPrefect = await data.data
+            if(fetchedPrefect.name){
+                setPrefect(fetchedPrefect)
+                toast({
+                    title: 'Added Prefect successfully',
+                    description: "",
+                    status: 'success',
+                    duration: 3000,
+                    isClosable: true,
+                })
+            }
+            else{
+                toast({
+                    title: 'Could not add prefect',
+                    description: "Re-enter the details carefully",
+                    status: 'error',
+                    duration: 3000,
+                    isClosable: true,
+                })
+            }
+        }
+        catch(err){
+            toast({
+                title: 'Could not add prefect',
+                description: "Re-enter the details carefully",
+                status: 'error',
+                duration: 3000,
+                isClosable: true,
+            })
+        }
+    }
 
   return (
       <>
@@ -44,7 +108,12 @@ function CreateUser({url}) {
                 </Tr>
             </Thead>
             <Tbody>
-                
+                <Tr>
+                    <Td>Feb</Td>
+                    <Td>{prefect.name}</Td>
+                    <Td>{prefect.phone}</Td>
+                    <Td>{prefect.userid}</Td>
+                </Tr>
             </Tbody>
           </Table>
           <Button onClick={onOpen} width={islargerthan600?'20%':'100%'} colorScheme='pink'>Add</Button>
@@ -57,19 +126,19 @@ function CreateUser({url}) {
                     <ModalBody>
                     <Flex direction='column'>
                         <FormLabel htmlFor='name'>Name</FormLabel>
-                            <Input name='name' id='name' type='name' variant='outline' placeholder='Enter Prefect Name' mt={1}></Input>
+                            <Input onChange={handleNameChange} name='name' id='name' type='text' variant='outline' placeholder='Enter Prefect Name' mt={1}></Input>
                         <FormLabel htmlFor='phone-no'>Phone </FormLabel>
-                            <Input name='phone-no' id='phone-no' type='text' variant='outline' placeholder='Enter Prefect Phone No.' mt={2}></Input>
+                            <Input onChange={handlePhoneChange} name='phone-no' id='phone-no' type='text' variant='outline' placeholder='Enter Prefect Phone No.' mt={2}></Input>
                         <FormLabel htmlFor='user-id'>User ID </FormLabel>
-                            <Input name='user-id' id='user-id' type='text' variant='outline' placeholder='Enter Prefect User ID' mt={2}></Input>
+                            <Input onChange={handleUseridChange} name='user-id' id='user-id' type='text' variant='outline' placeholder='Enter Prefect User ID' mt={2}></Input>
                         <FormLabel htmlFor='password'>Password </FormLabel>
-                            <Input name='password' id='password' type='text' variant='outline' placeholder='Password' mt={2}></Input>
+                            <Input onChange={handlePasswordChange} name='password' id='password' type='password' variant='outline' placeholder='Password' mt={2}></Input>
                     </Flex>
                     </ModalBody>
                 <ModalFooter>
                 
                 <Flex justifyContent='center' width='100%'>
-                    <Button colorScheme="blue" mr={3} width={islargerthan600?'50%':'100%'}>Register</Button>
+                    <Button colorScheme="blue" mr={3} width={islargerthan600?'50%':'100%'} onClick={handleSubmitForm}>Register</Button>
                 </Flex>
             </ModalFooter>
         </ModalContent>

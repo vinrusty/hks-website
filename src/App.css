@@ -21,6 +21,7 @@ body{
 .prefect-table{
   text-align: center;
   width: 100%;
+  background: rgb(241, 241, 241);
 }
 .prefect-table-heading{
   background: blue;
@@ -28,7 +29,7 @@ body{
   
 }
 .table-items{
-  padding: 2rem;
+  padding: 1rem;
 }
 @media screen and (max-width:600px){
   .prefect-table{

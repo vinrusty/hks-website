@@ -34,17 +34,17 @@ function Membership({url}) {
           <div className='dashboard-wrapper'>
             <SimpleGrid columns={[1, null, 3]} gap={4} margin={2} padding={4} borderRadius='10px'>
                 <Flex padding='2rem' as={Link} to='/register' alignItems='center' justifyContent='center' bg='#DCE1E9' height='250px' borderRadius='10px'  boxShadow='md'>
-                    <Text textAlign='center' fontSize={islargerthan600 ? '3xl':'2xl'}>
+                    <Text textAlign='center' fontSize={islargerthan600 ? '2xl':'1xl'}>
                         Regsiter for membership
                     </Text>
                 </Flex>
                 <Flex as={Link} to='/list-of-members' alignItems='center' justifyContent='center' bg='#DCE1E9' height='250px' borderRadius='10px' boxShadow='md'>
-                    <Text fontSize={islargerthan600 ? '3xl':'2xl'}>
+                    <Text fontSize={islargerthan600 ? '2xl':'1xl'}>
                         List of members
                     </Text>
                 </Flex>
                 <Flex alignItems='center' justifyContent='center' bg='#DCE1E9' height='250px' borderRadius='10px' boxShadow='md'>
-                    <Text fontSize={islargerthan600 ? '3xl':'2xl'}>
+                    <Text fontSize={islargerthan600 ? '2xl':'1xl'}>
                         Punya smarane list
                     </Text>
                 </Flex>

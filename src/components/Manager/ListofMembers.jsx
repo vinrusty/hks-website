@@ -1,4 +1,4 @@
-import { Flex, useMediaQuery, Text } from '@chakra-ui/react';
+import { Flex, useMediaQuery, Text, Button, Input, InputGroup, InputLeftElement, Center } from '@chakra-ui/react';
 import axios from 'axios';
 import React,{useState, useEffect} from 'react';
 import Navbar from '../Navbar';
@@ -13,9 +13,11 @@ import {
     Td,
     TableCaption,
   } from '@chakra-ui/react'
+import { SearchIcon } from '@chakra-ui/icons';
 
 function ListofMembers({url}) {
     const [members, setMembers] = useState([])
+    const [searchField, setSearchField] = useState('')
     const [islargerthan600] = useMediaQuery('(min-width: 600px)')
 
     useEffect(() => {
@@ -32,13 +34,32 @@ function ListofMembers({url}) {
         fetchData()
     },[])
 
+    const handleSearchFieldChange = (event) => {
+        setSearchField(event.target.value)
+    }
+
+    const filteredMembers = members.filter(member => {
+        return member.name.toLowerCase().includes(searchField.toLowerCase())
+    })
+
 
   return (
       <>
       <Navbar />
       <Flex>
         <Sidebar />
-        <Flex marginLeft={islargerthan600 ? '260px':'0px'} direction='column' justifyContent='center' width='100%'>
+        <Flex marginLeft={islargerthan600 ? '260px':'0px'} direction='column' alignItems='center' justifyContent='center' width='100%'>
+        <Flex padding='2rem' width='80%' alignItems='center' justifyContent='center'>
+        <InputGroup width='100%'>
+        <InputLeftElement
+        pointerEvents='none'
+        color='gray.300'
+        fontSize='1.2em'
+        children={<SearchIcon />}
+         />
+        <Input type='text' variant='filled' width='100%' onChange={handleSearchFieldChange} placeholder='Search' />
+        </InputGroup>
+        </Flex>
         <Table variant='simple' size={islargerthan600 ? 'md':'sm'}>
         <TableCaption>Hoysala karnataka Members</TableCaption>
         <Thead>
@@ -51,7 +72,7 @@ function ListofMembers({url}) {
         </Thead>
         <Tbody>
             {
-                members && members.map((member, i) => {
+                filteredMembers && filteredMembers.map((member, i) => {
                     return(
                         <Tr key={i}>
                             <Td padding='1em'><Text fontSize='xs'>V-167</Text></Td>

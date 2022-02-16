@@ -15,24 +15,22 @@ function Prefect() {
               <Flex marginLeft={islargerthan600 ? '260px':'0px'} direction='column' justifyContent='center' width='100%' padding='2em'>
               <SimpleGrid columns={[1, null, 3]} gap={4} margin={2} padding={islargerthan600? '2em':''} borderRadius='10px'>
                 <Flex as={Link} to='/create-prefect' alignItems='center' justifyContent='center' bg='#DCE1E9' height='250px' borderRadius='10px'  boxShadow='md'>
-                    <Text fontSize='3xl'>
-                        Prefect<br />
-                        Create User
+                    <Text fontSize={islargerthan600 ? '2xl':'1xl'}>
+                        Prefect Create User
                     </Text>
                 </Flex>
                 <Flex as={Link} to='/prefect/monthly-accounts' alignItems='center' justifyContent='center' bg='#DCE1E9' height='250px' borderRadius='10px' boxShadow='md'>
-                    <Text fontSize='3xl'>
-                        Prefect<br/>
-                        Monthly Accounts
+                    <Text fontSize={islargerthan600 ? '2xl':'1xl'}>
+                        Prefect Monthly Accounts
                     </Text>
                 </Flex>
                 <Flex alignItems='center' justifyContent='center' bg='#DCE1E9' height='250px' borderRadius='10px' boxShadow='md'>
-                    <Text fontSize='3xl'>
+                    <Text fontSize={islargerthan600 ? '2xl':'1xl'}>
                         Hostel Students
                     </Text>
                 </Flex>
                 <Flex as={Link} to='/prefect/ration-list' alignItems='center' justifyContent='center' bg='#DCE1E9' height='250px' borderRadius='10px' boxShadow='md'>
-                    <Text fontSize='3xl'>
+                    <Text fontSize={islargerthan600 ? '2xl':'1xl'}>
                         Ration List
                     </Text>
                 </Flex>
