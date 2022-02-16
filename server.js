@@ -36,7 +36,7 @@ catch(e){
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors({origin: 'http://localhost:3000' || 'https://hks-website-7f1d3.web.app/',
+app.use(cors({origin: 'https://hks-website-7f1d3.web.app/',
 }));
 app.use(session({
     secret: 'secretcode',
