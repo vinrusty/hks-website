@@ -39,7 +39,7 @@ function ListofMembers({url}) {
     }
 
     const filteredMembers = members.filter(member => {
-        return member.name.toLowerCase().includes(searchField.toLowerCase())
+        return member.name.toLowerCase().includes(searchField.toLowerCase()) || member.phone.toLowerCase().includes(searchField.toLowerCase())
     })
 
 
