@@ -10,7 +10,7 @@ const JuniorPrefectAccount = new mongoose.Schema({
         type: String,
         required: [true, '#']
     },
-    vegetable_list = Array
+    vegetable_list: Array
 })
 
 module.exports = new mongoose.model("JuniorPrefectAccount", JuniorPrefectAccount)
