@@ -35,10 +35,9 @@ try{
 catch(e){
     console.log("coudn't connect :(")
 }
-const origin = 'https://hks-website-7f1d3.web.app'
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors({origin: origin,
+app.use(cors({origin: 'https://hks-website-7f1d3.web.app',
 }));
 app.use(session({
     secret: 'secretcode',
