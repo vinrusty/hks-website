@@ -8,7 +8,7 @@ import { AddIcon, CloseIcon } from '@chakra-ui/icons';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-function MonthlyRationList({url}) {
+function MonthlyRationList({url, id, role}) {
     const [islargerthan600] = useMediaQuery('(min-width: 600px)')
     const {isOpen, onOpen, onClose} = useDisclosure();
     const [rationName, setRationName] = useState('')
@@ -98,9 +98,9 @@ function MonthlyRationList({url}) {
 
   return (
     <div>
-        <Navbar />
+        {/* <Navbar /> */}
         <Flex>
-            <Sidebar />
+            <Sidebar id={id} role={role} />
             <Flex marginLeft={islargerthan600 ? '260px':'0px'} direction='column' justifyContent='center' width='100%'>
             <table className='prefect-table'>
                 <tr className='prefect-table-heading'>

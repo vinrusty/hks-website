@@ -14,11 +14,12 @@ body{
   height: 100%;
   overflow: hidden;
 }
-*{
+/* *{
   overflow-x: hidden;
   font-family: 'Montserrat', sans-serif;
-}
+} */
 .prefect-table{
+  margin: 5px;
   text-align: center;
   width: 100%;
   background: rgb(241, 241, 241);
@@ -32,6 +33,9 @@ body{
   padding: 1rem;
 }
 @media screen and (max-width:600px){
+  .app{
+    overflow-x: hidden;
+  }
   .prefect-table{
     margin: 0px;
     text-align: center;

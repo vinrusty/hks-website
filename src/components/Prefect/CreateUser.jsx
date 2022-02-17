@@ -23,7 +23,7 @@ import {
   } from "@chakra-ui/react"
 import axios from 'axios';
 
-function CreateUser({url}) {
+function CreateUser({url, id, role}) {
 
     const {isOpen, onOpen, onClose} = useDisclosure();
     const [islargerthan600] = useMediaQuery('(min-width: 600px)')
@@ -93,9 +93,9 @@ function CreateUser({url}) {
 
   return (
       <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Flex>
-          <Sidebar />
+          <Sidebar id={id} role={role} />
           <Flex marginLeft={islargerthan600 ? '260px':'0px'} direction='column' justifyContent='center' width='100%'>
           <Table variant='simple' size={islargerthan600 ? 'md':'sm'}>
             <TableCaption>Prefect Information</TableCaption>

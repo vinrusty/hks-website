@@ -1,25 +1,38 @@
-import {  Box, Flex, Text, useMediaQuery, useDisclosure, Heading } from '@chakra-ui/react';
+import {  Box, Flex, Text, useMediaQuery, useDisclosure, Button } from '@chakra-ui/react';
 import React,{ useRef } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import {Drawer,DrawerBody,DrawerFooter,DrawerHeader,DrawerOverlay,DrawerContent,DrawerCloseButton} from "@chakra-ui/react"
+import axios from 'axios';
 
-function Navbar() {
+function Navbar({url,user}) {
 
     const [islargerthan600] = useMediaQuery('(min-width:600px)')
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = useRef()
+    const navigate = useNavigate()
+
+    const handleLogout = async() => {
+        try{
+            const res = axios.post(url+'logout',{token: user.refreshToken})
+            const message = await res.data
+            navigate('/')
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
 
   return (
   <div>
     <Flex width='100%' height='60px' bgGradient='linear(to-l, #7928CA, #FF0080)' alignItems='center' justifyContent='center' padding='2em' overflowY='hidden'>
         <img src='/images/logo.png' alt='sangha logo' style={{width:'60px'}} />
-        <Flex marginLeft='auto'>
+        <Flex marginLeft='auto' alignItems='center'>
         <Box as={NavLink} to='/dashboard'>
             <Text fontSize={islargerthan600 ? 'xl':'1em'} m={3} color='white'>Home</Text>
         </Box>
-        <Box as={NavLink} to='/'>
-            <Text fontSize={islargerthan600 ? 'xl':'1em'} m={3} color='white'>Sign Out</Text>
+        <Box>
+            <Button onClick={handleLogout} colorScheme='blue' fontSize={islargerthan600 ? 'xl':'1em'} m={3} color='white'>Sign Out</Button>
         </Box>
         {
             islargerthan600 ?

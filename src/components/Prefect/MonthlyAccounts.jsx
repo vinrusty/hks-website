@@ -6,7 +6,7 @@ import {AlertDialog,AlertDialogBody,AlertDialogFooter,AlertDialogHeader,AlertDia
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-function MonthlyAccounts({url}) {
+function MonthlyAccounts({url, id, role}) {
 
     const [islargerthan600] = useMediaQuery('(min-width: 600px)')
     const [Open , setOpen] = useState(false)
@@ -88,9 +88,9 @@ function MonthlyAccounts({url}) {
 
   return (
       <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <Flex>
-      <Sidebar />
+      <Sidebar id={id} role={role} />
       <Flex marginLeft={islargerthan600 ? '260px':'0px'} direction='column' justifyContent='center' width='100%'>
       <SimpleGrid columns={[1, null, 3]} gap={4} margin={2} padding={islargerthan600? '2em':''} borderRadius='10px'>
       {

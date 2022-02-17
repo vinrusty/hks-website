@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-function Membership({url}) {
+function Membership({url, role}) {
   
   const [islargerthan600] = useMediaQuery('(min-width: 600px)')
   const { id } = useParams()
@@ -28,9 +28,9 @@ function Membership({url}) {
   
   return (
       <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Flex>
-          <Sidebar />
+          <Sidebar id={id} role={role} />
           <div className='dashboard-wrapper'>
             <SimpleGrid columns={[1, null, 3]} gap={4} margin={2} padding={4} borderRadius='10px'>
                 <Flex padding='2rem' as={Link} to='/register' alignItems='center' justifyContent='center' bg='#DCE1E9' height='250px' borderRadius='10px'  boxShadow='md'>

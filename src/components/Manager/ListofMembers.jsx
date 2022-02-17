@@ -15,7 +15,7 @@ import {
   } from '@chakra-ui/react'
 import { SearchIcon } from '@chakra-ui/icons';
 
-function ListofMembers({url}) {
+function ListofMembers({url, id, role}) {
     const [members, setMembers] = useState([])
     const [searchField, setSearchField] = useState('')
     const [islargerthan600] = useMediaQuery('(min-width: 600px)')
@@ -45,9 +45,9 @@ function ListofMembers({url}) {
 
   return (
       <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Flex>
-        <Sidebar />
+        <Sidebar id={id} role={role} />
         <Flex marginLeft={islargerthan600 ? '260px':'0px'} direction='column' alignItems='center' justifyContent='center' width='100%'>
         <Flex padding='2rem' width='80%' alignItems='center' justifyContent='center'>
         <InputGroup width='100%'>

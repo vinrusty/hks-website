@@ -6,7 +6,7 @@ import Navbar from '../Navbar'
 import Sidebar from '../Sidebar'
 import axios from 'axios'
 
-function DailyAccounts({url}) {
+function DailyAccounts({url, id, role}) {
     const [islargerthan600] = useMediaQuery('(min-width: 600px)')
     const {isOpen, onOpen, onClose} = useDisclosure();
     const [vegetableExp, setvegetableExp] = useState('')
@@ -107,13 +107,20 @@ function DailyAccounts({url}) {
 
   return (
     <div>
-        <Navbar />
+        {/* <Navbar /> */}
         <Flex>
-            <Sidebar />
+            <Sidebar id={id} role={role} />
             <Flex marginLeft={islargerthan600 ? '250px':'0px'} direction='column' justifyContent='center' width='100%'>
             <Flex alignItems='center'>
-            <Button width='50px' borderRadius='50%' margin='20px' onClick={onOpen} colorScheme='teal'><AddIcon w={6} h={6} /></Button>  
-            <Text fontSize='2xl'>Create</Text>
+            {
+                role === 'junior-prefect' ?
+                <>
+                <Button width='50px' borderRadius='50%' margin='20px' onClick={onOpen} colorScheme='teal'><AddIcon w={6} h={6} /></Button>  
+                <Text fontSize='2xl'>Create</Text>
+                </>
+                :
+                <></>
+            }
             </Flex>
             <table className='prefect-table'>
                 <tr className='prefect-table-heading'>

@@ -5,7 +5,7 @@ import { Flex, useMediaQuery, Button, Input, FormLabel } from '@chakra-ui/react'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-function AccountDetails({url}) {
+function AccountDetails({url, userid, role}) {
 
   const {id} = useParams()
     
@@ -38,8 +38,6 @@ function AccountDetails({url}) {
       }
       fetchData()
     },[])
-
-    console.log(account)
 
     const handleAmountChange = (event) => {
       const date = new Date()
@@ -83,7 +81,6 @@ function AccountDetails({url}) {
         }
         )
         const updatedData = await data.data
-        console.log(updatedData)
       }
       catch(err){
         console.log(err)
@@ -93,9 +90,9 @@ function AccountDetails({url}) {
 
   return (
       <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <Flex>
-      <Sidebar />
+      <Sidebar id={userid} role={role} />
       <Flex marginLeft={islargerthan600 ? '250px':'0px'} direction='column' width='100%' padding='2rem'>
       <Flex direction={islargerthan600 ? 'row':'column'}>
       <Flex direction='column' width='100%' margin='2px' mt={3}>

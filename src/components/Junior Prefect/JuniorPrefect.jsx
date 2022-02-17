@@ -4,15 +4,15 @@ import React from 'react'
 import Navbar from '../Navbar'
 import Sidebar from '../Sidebar'
 
-function JuniorPrefect() {
+function JuniorPrefect({id, role}) {
 
     const [islargerthan600] = useMediaQuery('(min-width: 600px)')
 
   return (
     <div>
-        <Navbar />
+        {/* <Navbar /> */}
         <Flex>
-            <Sidebar />
+            <Sidebar id={id} role={role} />
             <Flex marginLeft={islargerthan600 ? '260px':'0px'} direction='column' justifyContent='center' width='100%' padding='2em'>
               <Heading textAlign='center' overflow='hidden'>Junior Prefect</Heading>
               <SimpleGrid columns={[1, null, 3]} gap={4} margin={2} padding={islargerthan600? '2em':''} borderRadius='10px'>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import MembershipForm from './components/Manager/MembershipForm';
 import LoginForm from './components/LoginForm';
@@ -16,30 +16,45 @@ import JuniorPrefect from './components/Junior Prefect/JuniorPrefect';
 import DailyAccounts from './components/Junior Prefect/DailyAccounts';
 import PersonalDetails from './components/Students/PersonalDetails';
 import './App.css';
+import Navbar from './components/Navbar';
 
 function App() {
 
   const URL = 'https://rocky-reef-88825.herokuapp.com/'
+  // const URL = 'http://localhost:3001/'
+  const [user, setUser] = useState({})
+
+  const loadUser = (user) => {
+    setUser(user)
+  }
 
   return (
-    <div>
+    <div className='app'>
     <Router>
+    <Navbar user={user} />
       <Routes>
-        <Route path='/' element={<LoginForm url={URL} />} />
-        <Route path='/register' element={<MembershipForm url={URL} />} />
-        <Route path='/dashboard' element={<Membership url={URL} />} />
-        <Route path='/list-of-members' element={<ListofMembers url={URL} />} />
-        <Route path='/prefect' element={<Prefect url={URL} />} />
-        <Route path='/create-prefect' element={<CreateUser url={URL} />} />
-        <Route path='/list-of-members/:id' element={<Member url={URL} />} />
-        <Route path='/prefect/monthly-accounts' element={<MonthlyAccounts url={URL} />} />
-        <Route path='/prefect/monthly-accounts/:id' element={<AccountDetails url={URL} />} />
-        <Route path='/prefect/ration-list' element={<RationList url={URL} />} />
-        <Route path='/prefect/ration-list/:date' element={<MonthlyRationList url={URL} />} />
-        <Route path='/students' element={<Students url={URL} />} />
-        <Route path='/junior-prefect' element={<JuniorPrefect url={URL} />} />
-        <Route path='/junior-prefect/daily-accounts' element={<DailyAccounts url={URL} />} />
-        <Route path='/students/personal-details' element={<PersonalDetails url={URL} />} />
+        <Route path='/' element={<LoginForm url={URL} loadUser={loadUser} />} />
+        <Route path='/dashboard/:id' element={<Membership url={URL} id={user.userid} role={user.role} />} />
+        <Route path='/prefect' element={<Prefect url={URL} id={user.userid} role={user.role} />} />
+        {
+          user.role === "manager" ?
+          <>
+          <Route path='/register' element={<MembershipForm url={URL} id={user.userid} />} />
+          <Route path='/list-of-members' element={<ListofMembers url={URL} id={user.userid} role={user.role} />} />
+          <Route path='/create-prefect' element={<CreateUser url={URL} id={user.userid} role={user.role} />} />
+          </>
+          :
+          <></>
+        }
+        <Route path='/list-of-members/:id' element={<Member url={URL} id={user.userid} role={user.role} />} />
+        <Route path='/prefect/monthly-accounts' element={<MonthlyAccounts url={URL} id={user.userid} role={user.role} />} />
+        <Route path='/prefect/monthly-accounts/:id' element={<AccountDetails url={URL} userid={user.userid} role={user.role} />} />
+        <Route path='/prefect/ration-list' element={<RationList url={URL} id={user.userid} />} />
+        <Route path='/prefect/ration-list/:date' element={<MonthlyRationList url={URL} id={user.userid} role={user.role} />} />
+        <Route path='/students' element={<Students url={URL} id={user.userid} role={user.role} />} />
+        <Route path='/junior-prefect' element={<JuniorPrefect url={URL} />} id={user.userid} role={user.role} />
+        <Route path='/junior-prefect/daily-accounts' element={<DailyAccounts url={URL} id={user.userid} role={user.role} />} />
+        <Route path='/students/personal-details' element={<PersonalDetails url={URL} id={user.userid} role={user.role} />} />
       </Routes>
     </Router>
     </div>

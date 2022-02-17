@@ -4,7 +4,7 @@ import React,{ useState } from 'react'
 import Navbar from '../Navbar'
 import Sidebar from '../Sidebar'
 
-function PersonalDetails({url}) {
+function PersonalDetails({url, id, role}) {
     const [islargerthan600] = useMediaQuery('(min-width: 600px)')
     const [fname, setFname] = useState('')
     const [mname, setMname] = useState('')
@@ -66,9 +66,8 @@ function PersonalDetails({url}) {
 
   return (
     <div>
-        <Navbar />
         <Flex>
-            <Sidebar />
+            <Sidebar id={id} role={role} />
             <Flex marginLeft={islargerthan600 ? '260px':'0px'} width='100%' direction='column' padding='2rem'>
                 <Text fontSize='2xl' textAlign='center'>Upload user personal details</Text>
                 <Flex direction='column' background='#DCD6F7' borderRadius='15px' padding='2rem' mt={5}>

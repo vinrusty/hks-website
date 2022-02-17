@@ -7,7 +7,7 @@ import { AddIcon, CloseIcon } from '@chakra-ui/icons';
 import {Drawer,DrawerBody,DrawerHeader,DrawerOverlay,DrawerContent,DrawerCloseButton} from "@chakra-ui/react"
 import axios from 'axios';
 
-function RationList({url}) {
+function RationList({url, id, role}) {
     const [islargerthan600] = useMediaQuery('(min-width: 600px)')
     const {isOpen, onOpen, onClose} = useDisclosure();
     const [rationName, setRationName] = useState('')
@@ -98,9 +98,8 @@ function RationList({url}) {
 
   return (
       <div>
-          <Navbar />
           <Flex>
-              <Sidebar />
+              <Sidebar id={id} role={role} />
               <Flex marginLeft={islargerthan600 ? '260px':'0px'} direction='column' justifyContent='center' width='100%' padding='2em'>
               <Heading textAlign='center' overflow='hidden'>Monthly Rations</Heading>
               <SimpleGrid columns={[1, null, 3]} gap={4} margin={2} padding={islargerthan600? '2em':''} borderRadius='10px'>

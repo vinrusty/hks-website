@@ -2,7 +2,7 @@ import { Button, Flex, FormLabel, Input, InputGroup, InputLeftAddon, Text, useTo
 import React,{useState} from 'react';
 import axios from 'axios';
 
-function MembershipForm({url}) {
+function MembershipForm({url, id, role}) {
   
   const [name, setName] = useState('');
   const [aadhar, setAadhar] = useState('');
