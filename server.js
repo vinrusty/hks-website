@@ -18,6 +18,8 @@ const PrefectAccount = require('./models/PrefectAccount')
 const JuniorPrefectAccount = require('./models/JuniorPrefectAccount')
 const multer = require('multer')
 const uploads = multer({dest: 'uploads/'})
+const jwt = require('jsonwebtoken')
+const RefreshToken = require('./models/RefreshTokens')
 
 
 dotenv.config()
@@ -33,10 +35,10 @@ try{
 catch(e){
     console.log("coudn't connect :(")
 }
-
+const origin = 'https://hks-website-7f1d3.web.app'
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors({origin: 'https://hks-website-7f1d3.web.app',
+app.use(cors({origin: origin,
 }));
 app.use(session({
     secret: 'secretcode',
@@ -91,23 +93,74 @@ app.post('/create-user', (req, res) => {
     })
 })
 
-app.post('/login', (req, res, next) => {
-    passport.authenticate('local', (err, user, info) => {
+const verify = (req, res, next) => {
+    const authHeader = req.headers.authorization;
+    if (authHeader) {
+      const token = authHeader.split(" ")[1];
+  
+      jwt.verify(token, "mySecretKey", (err, user) => {
+        if (err) {
+          return res.status(403).json("Token is not valid!");
+        }
+  
+        req.user = user;
+        next();
+      });
+    } else {
+      res.status(401).json("You are not authenticated!");
+    }
+  };
+
+const generateAccessToken = (user) => {
+    return jwt.sign({ id: user.id, isAdmin: user.isAdmin }, "mySecretKey", {
+      expiresIn: "15m",
+    });
+  };
+  
+const generateRefreshToken = (user) => {
+    return jwt.sign({ id: user.id, isAdmin: user.isAdmin }, "myRefreshSecretKey");
+};
+
+app.post('/login', (req, res, done) => {
+    const {userid, password} = req.body
+    User.findOne({userid: userid}, (err, user) => {
         if(err){
-            throw err
+            throw(err)
         }
         if(!user){
-            res.status(403).json('no user found')
+            res.status(400).json('no user')
         }
         else{
-            req.logIn(user, (err) => {
-                if(err){
-                    throw err
+            bcrypt.compare(password, user.password, (err, result) => {
+                if(err) throw err
+                if(result === true){
+                    const accessToken = generateAccessToken(user);
+                    const refreshToken = generateRefreshToken(user);
+                    const newRefreshToken = new RefreshToken({
+                        refreshToken: refreshToken
+                    })
+                    newRefreshToken.save()
+                    res.json({
+                        name: user.name,
+                        userid: user.userid,
+                        phone: user.phone,
+                        role: user.role,
+                        accessToken,
+                        refreshToken,
+                    })
                 }
-                res.json(user)
+                else{
+                    res.status(400).json('incorrect userid or password')
+                }
             })
         }
-    })(req, res, next)
+    })
+})
+
+app.post('/logout', verify, async(req, res) => {
+    const token = req.body.token
+    await RefreshToken.deleteOne({refreshToken: token})
+    res.json('success')
 })
 
 // app.get('/dashboard/:id',(req, res) => {
@@ -266,9 +319,9 @@ app.post('/junior-prefect/daily-accounts', async(req, res) => {
     }
 })
 
-app.listen(process.env.PORT, ()=>{
-    console.log(`listening at ${process.env.PORT}`)
-})
-// app.listen('3001', ()=>{
-//     console.log(`listening at 3001`)
+// app.listen(process.env.PORT || 3000, ()=>{
+//     console.log(`listening at ${process.env.PORT}`)
 // })
+app.listen('3001', ()=>{
+    console.log(`listening at 3001`)
+})
