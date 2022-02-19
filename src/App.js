@@ -54,7 +54,7 @@ function App() {
         <Route path='/students' element={<Students url={URL} id={user.userid} role={user.role} />} />
         <Route path='/junior-prefect' element={<JuniorPrefect url={URL} />} id={user.userid} role={user.role} />
         <Route path='/junior-prefect/daily-accounts' element={<DailyAccounts url={URL} id={user.userid} role={user.role} />} />
-        <Route path='/students/personal-details' element={<PersonalDetails url={URL} id={user.userid} role={user.role} />} />
+        <Route path='/students/personal-details' element={<PersonalDetails url={URL} id={user.userid} role={user.role} username={user.name} userphone={user.phone} />} />
       </Routes>
     </Router>
     </div>

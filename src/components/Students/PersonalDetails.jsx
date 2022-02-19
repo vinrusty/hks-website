@@ -14,19 +14,21 @@ function PersonalDetails({url, id, role}) {
     const [address, setAddress] = useState('')
     const [aadhar, setAadhar] = useState('')
     const [roomno, setRoomno] = useState('')
+    const [file, setFile] = useState('')
 
     const handleSumbitForm = async() => {
         try{
             const data = await axios.post(url+'personal-details',
             {
-                fatherName: fname,
-                motherName: mname,
+                fathername: fname,
+                mothername: mname,
                 fphone: fphone,
                 mphone: mphone,
                 address: address,
                 college: college,
                 aadhar_no: aadhar,
-                room_no: roomno
+                room_no: roomno,
+                studentImage: file
             },
             {
                 headers: {'Content-Type':'application/json'}
@@ -62,6 +64,9 @@ function PersonalDetails({url, id, role}) {
     }
     const handleRoomnoChange = (event) =>{
         setRoomno(event.target.value);
+    }
+    const handleFileChange = (event) => {
+        setFile(event.target.file[0])
     }
 
   return (
@@ -112,7 +117,7 @@ function PersonalDetails({url, id, role}) {
                 </Flex>
                 <Flex direction='column' width='100%' margin='2px' mt={3}>
                     <FormLabel htmlFor='photo'>Photo</FormLabel>
-                    <Input placeholder='Add your picture' type='file' background='#FFF' />
+                    <Input onChange={handleFileChange} placeholder='Add your picture' type='file' background='#FFF' />
                 </Flex>
                 <Flex width='100%'>
                     <Button marginTop='10px' width='20%' colorScheme='teal' onClick={handleSumbitForm} >Submit</Button>
