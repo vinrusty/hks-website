@@ -17,7 +17,6 @@ const PersonalDetail = require('./models/PersonalDetails')
 const PrefectAccount = require('./models/PrefectAccount')
 const JuniorPrefectAccount = require('./models/JuniorPrefectAccount')
 const multer = require('multer')
-const uploads = multer({dest: 'uploads/'})
 const jwt = require('jsonwebtoken')
 const RefreshToken = require('./models/RefreshTokens')
 
@@ -39,6 +38,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors({origin: 'https://hks-website-7f1d3.web.app',
 }));
+app.use('/uploads', express.static('uploads'))
 app.use(session({
     secret: 'secretcode',
     resave: true,
@@ -48,6 +48,28 @@ app.use(cookieParser('secretcode'))
 app.use(passport.initialize())
 app.use(passport.session())
 require('./passportConfig')(passport)
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb){
+        cb(null,'./uploads/')
+    },
+    filename: function(req, file, cb){
+        cb(null, file.originalname)
+    }
+})
+
+const fileFilter = (req, file, cb) => {
+    if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){
+        cb(null, true);
+    }
+    else{
+        cb(null, false);
+    }
+}
+
+const upload = multer({storage: storage,
+    fileFilter: fileFilter
+})
 
 app.get('/', (req,res)=>{
     res.send('hello')
@@ -251,13 +273,24 @@ app.put('/create-ration-list/:date', async(req, res) => {
     }
 })
 
-app.post('/personal-details', async(req, res) => {
-    const personalDetail = new PersonalDetail(req.body)
+app.post('/personal-details', upload.single('studentImage'), async(req, res) => {
+    const personalDetail = new PersonalDetail({
+        fathername: req.body.fathername,
+        mothername: req.body.mothername,
+        fphone: req.body.fphone,
+        mphone: req.body.mphone,
+        address: req.body.address,
+        college: req.body.college,
+        aadhar_no: req.body.aadhar_no,
+        room_no: req.body.room_no,
+        studentImage: req.file.path
+    })
     try{
         const newPersonalDetail = await personalDetail.save();
         res.json(newPersonalDetail);
     }
     catch(err){
+        console.log(err)
         res.status(400).json('could not register')
     }
 })
@@ -318,9 +351,9 @@ app.post('/junior-prefect/daily-accounts', async(req, res) => {
     }
 })
 
-app.listen(process.env.PORT || 3001, ()=>{
-    console.log(`listening at ${process.env.PORT}`)
-})
-// app.listen('3001', ()=>{
-//     console.log(`listening at 3001`)
+// app.listen(process.env.PORT || 3001, ()=>{
+//     console.log(`listening at ${process.env.PORT}`)
 // })
+app.listen('3001', ()=>{
+    console.log(`listening at 3001`)
+})
