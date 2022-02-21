@@ -5,6 +5,7 @@ import React,{ useState, useRef } from 'react'
 import Navbar from '../Navbar'
 import Sidebar from '../Sidebar'
 import axios from 'axios'
+import ReactToExcel from 'react-html-table-to-excel'
 
 function DailyAccounts({url, id, role}) {
     const [islargerthan600] = useMediaQuery('(min-width: 600px)')
@@ -122,7 +123,7 @@ function DailyAccounts({url, id, role}) {
                 <></>
             }
             </Flex>
-            <table className='prefect-table'>
+            <table className='prefect-table' id='jp-data'>
                 <tr className='prefect-table-heading'>
                     <th>Date</th>
                     <th>Milk</th>
@@ -176,6 +177,14 @@ function DailyAccounts({url, id, role}) {
                     })
                 }
             </table>
+            <Button id='export_button' width={islargerthan600 ? '10%':'30%'} margin='20px' colorScheme='teal'>
+            <ReactToExcel
+                table='jp-data'
+                filename='prefectaccounts'
+                sheet='sheet 1'
+                buttonText='Download'
+            />
+            </Button>
             <Drawer onClose={onClose} isOpen={isOpen} size='xl'>
                 <DrawerOverlay />
                 <DrawerContent>

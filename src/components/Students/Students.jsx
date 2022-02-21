@@ -24,6 +24,11 @@ function Students({id, role}) {
                             Markscard Details
                         </Text>
                     </Flex>
+                    <Flex padding='2rem' as={Link} to='/students/registar' alignItems='center' justifyContent='center' bg='#DCE1E9' height='250px' borderRadius='10px'  boxShadow='md'>
+                        <Text textAlign='center' fontSize={islargerthan600 ? '3xl':'2xl'}>
+                            Registar
+                        </Text>
+                    </Flex>
                 </SimpleGrid>
               </Flex>
           </Flex>

@@ -1,5 +1,5 @@
 import { Flex, Text, Input, FormLabel, Button, useMediaQuery, useToast, useDisclosure } from '@chakra-ui/react';
-import React,{ useState } from 'react';
+import React,{ useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
@@ -100,7 +100,6 @@ function LoginForm({url,loadUser}) {
                         }
                         )
             const message = await data.data
-            console.log(message)
             if(message.userid){
                 loadUser(message)
                 if(message.role === 'manager'){
@@ -133,6 +132,15 @@ function LoginForm({url,loadUser}) {
               })
         }
     }
+
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem("user");
+        if (loggedInUser) {
+            const foundUser = JSON.parse(loggedInUser);
+            loadUser(foundUser)
+            navigate(`dashboard/${foundUser.userid}`)
+        }
+    },[])
 
 
 

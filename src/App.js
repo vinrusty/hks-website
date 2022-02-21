@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import MembershipForm from './components/Manager/MembershipForm';
 import LoginForm from './components/LoginForm';
@@ -15,23 +15,34 @@ import MonthlyRationList from './components/Prefect/MonthlyRationList';
 import JuniorPrefect from './components/Junior Prefect/JuniorPrefect';
 import DailyAccounts from './components/Junior Prefect/DailyAccounts';
 import PersonalDetails from './components/Students/PersonalDetails';
+import Register from './components/Students/Register';
 import './App.css';
 import Navbar from './components/Navbar';
 
 function App() {
 
-  const URL = 'https://rocky-reef-88825.herokuapp.com/'
-  // const URL = 'http://localhost:3001/'
+  // const URL = 'https://rocky-reef-88825.herokuapp.com/'
+  const URL = 'http://localhost:3001/'
   const [user, setUser] = useState({})
 
   const loadUser = (user) => {
     setUser(user)
+    localStorage.setItem('user', JSON.stringify(user))
   }
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setUser(foundUser);
+    }
+  }, []);
 
   return (
     <div className='app'>
     <Router>
-    <Navbar user={user} />
+
+    <Navbar url={URL} user={user} loadUser={loadUser} />
       <Routes>
         <Route path='/' element={<LoginForm url={URL} loadUser={loadUser} />} />
         <Route path='/dashboard/:id' element={<Membership url={URL} id={user.userid} role={user.role} />} />
@@ -52,9 +63,10 @@ function App() {
         <Route path='/prefect/ration-list' element={<RationList url={URL} id={user.userid} />} />
         <Route path='/prefect/ration-list/:date' element={<MonthlyRationList url={URL} id={user.userid} role={user.role} />} />
         <Route path='/students' element={<Students url={URL} id={user.userid} role={user.role} />} />
-        <Route path='/junior-prefect' element={<JuniorPrefect url={URL} />} id={user.userid} role={user.role} />
+        <Route path='/junior-prefect' element={<JuniorPrefect url={URL} id={user.userid} role={user.role} />} />
         <Route path='/junior-prefect/daily-accounts' element={<DailyAccounts url={URL} id={user.userid} role={user.role} />} />
         <Route path='/students/personal-details' element={<PersonalDetails url={URL} id={user.userid} role={user.role} username={user.name} userphone={user.phone} />} />
+        <Route path='/students/registar' element={<Register url={URL} id={user.userid} role={user.role} username={user.name} userphone={user.phone} />} />
       </Routes>
     </Router>
     </div>

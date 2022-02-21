@@ -6,8 +6,6 @@ function Sidebar({id, role}) {
 
   const [islargerthan600] = useMediaQuery("(min-width: 600px)")
 
-  console.log(role)
-
   return (
     <>
     {

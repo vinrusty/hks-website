@@ -4,6 +4,7 @@ import Sidebar from '../Sidebar';
 import { Flex, useMediaQuery, Button, Input, FormLabel } from '@chakra-ui/react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import ReactToExcel from 'react-html-table-to-excel'
 
 function AccountDetails({url, userid, role}) {
 
@@ -86,15 +87,14 @@ function AccountDetails({url, userid, role}) {
         console.log(err)
       }
     }
-    
 
   return (
       <div>
       {/* <Navbar /> */}
       <Flex>
       <Sidebar id={userid} role={role} />
-      <Flex marginLeft={islargerthan600 ? '250px':'0px'} direction='column' width='100%' padding='2rem'>
-      <Flex direction={islargerthan600 ? 'row':'column'}>
+      <Flex marginLeft={islargerthan600 ? '250px':'0px'} direction='column' width='100%' padding={islargerthan600 ? '2rem' : '0'}>
+      <Flex direction={islargerthan600 ? 'row':'column'} padding='1rem'>
       <Flex direction='column' width='100%' margin='2px' mt={3}>
         <FormLabel htmlFor='amount'>Amount</FormLabel>
         <Input placeholder='Enter amount' type='number' background='#FFF' onChange={handleAmountChange} />
@@ -113,16 +113,16 @@ function AccountDetails({url, userid, role}) {
       </Flex>
       </Flex>
       <Button width={islargerthan600 ? '10%':'30%'} margin='20px' colorScheme='teal' onClick={handleSubmitForm}>Add</Button>
-      <table style={{textAlign: 'center', overflowX: 'auto'}}>
+      <table className='register-table' id='prefect_data'>
       <thead>
         <tr>
-          <th>Date</th>
-          <th>Amount</th>
-          <th>Milk</th>
-          <th>Vegetable</th>
-          <th>Others</th>
-          <th>Total</th>
-          <th>balance</th>
+          <th className='register-table-head'>Date</th>
+          <th className='register-table-head'>Amount</th>
+          <th className='register-table-head'>Milk</th>
+          <th className='register-table-head'>Vegetable</th>
+          <th className='register-table-head'>Others</th>
+          <th className='register-table-head'>Total</th>
+          <th className='register-table-head'>balance</th>
         </tr>
       </thead>
       <tbody>
@@ -130,19 +130,28 @@ function AccountDetails({url, userid, role}) {
           account.accountList && account.accountList.map((acc, index) => {
             return (
               <tr key={index}>
-                <td>{acc.date}</td>
-                <td>{acc.amount}</td>
-                <td>{acc.milk}</td>
-                <td>{acc.vegetables}</td>
-                <td>{acc.others}</td>
-                <td>{acc.total}</td>
-                <td>{acc.balance}</td>
+                <td className='register-table-head'>{acc.date}</td>
+                <td className='register-table-head'>{acc.amount}</td>
+                <td className='register-table-head'>{acc.milk}</td>
+                <td className='register-table-head'>{acc.vegetables}</td>
+                <td className='register-table-head'>{acc.others}</td>
+                <td className='register-table-head'>{acc.total}</td>
+                <td className='register-table-head'>{acc.balance}</td>
               </tr>
             )
           })
         }
       </tbody>
       </table>
+      
+      <Button id='export_button' width={islargerthan600 ? '10%':'30%'} margin='20px' colorScheme='teal'>
+      <ReactToExcel
+        table='prefect_data'
+        filename='prefectaccounts'
+        sheet='sheet 1'
+        buttonText='Download'
+       />
+       </Button>
       </Flex>
       </Flex>
       </div>
