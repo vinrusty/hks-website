@@ -6,11 +6,7 @@ const mongoose = require('mongoose')
 const app = express()
 const Member = require('./models/Member')
 const Prefect = require('./models/Users')
-const passport = require('passport')
-const localStrategy = require('passport-local').Strategy
-const cookieParser = require('cookie-parser')
 const bcrypt = require('bcryptjs')
-const session = require('express-session')
 const User = require('./models/Users')
 const Ration = require('./models/Ration')
 const PersonalDetail = require('./models/PersonalDetails')
@@ -19,6 +15,7 @@ const JuniorPrefectAccount = require('./models/JuniorPrefectAccount')
 const multer = require('multer')
 const jwt = require('jsonwebtoken')
 const RefreshToken = require('./models/RefreshTokens')
+const Register = require('./models/Register')
 
 
 dotenv.config()
@@ -34,20 +31,13 @@ try{
 catch(e){
     console.log("coudn't connect :(")
 }
+// const origin = 'http://localhost:3000'
+const origin = 'https://hks-website-7f1d3.web.app'
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors({origin: 'https://hks-website-7f1d3.web.app',
+app.use(cors({origin: origin,
 }));
 app.use('/uploads', express.static('uploads'))
-app.use(session({
-    secret: 'secretcode',
-    resave: true,
-    saveUninitialized: true
-}))
-app.use(cookieParser('secretcode'))
-app.use(passport.initialize())
-app.use(passport.session())
-require('./passportConfig')(passport)
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
@@ -114,99 +104,75 @@ app.post('/create-user', (req, res) => {
     })
 })
 
-const verify = (req, res, next) => {
-    const authHeader = req.headers.authorization;
-    if (authHeader) {
-      const token = authHeader.split(" ")[1];
-  
-      jwt.verify(token, "mySecretKey", (err, user) => {
-        if (err) {
-          return res.status(403).json("Token is not valid!");
-        }
-  
-        req.user = user;
-        next();
-      });
-    } else {
-      res.status(401).json("You are not authenticated!");
-    }
-  };
+function generateAccessToken(user){
+    return jwt.sign({userid: user.userid, role: user.role}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '5m'})
+}
 
-const generateAccessToken = (user) => {
-    return jwt.sign({ id: user.id, isAdmin: user.isAdmin }, "mySecretKey", {
-      expiresIn: "15m",
-    });
-  };
-  
-const generateRefreshToken = (user) => {
-    return jwt.sign({ id: user.id, isAdmin: user.isAdmin }, "myRefreshSecretKey");
-};
-
-app.post('/login', (req, res, done) => {
-    const {userid, password} = req.body
-    User.findOne({userid: userid}, (err, user) => {
-        if(err){
-            throw(err)
-        }
-        if(!user){
-            res.status(400).json('no user')
-        }
-        else{
-            bcrypt.compare(password, user.password, (err, result) => {
-                if(err) throw err
-                if(result === true){
-                    const accessToken = generateAccessToken(user);
-                    const refreshToken = generateRefreshToken(user);
-                    const newRefreshToken = new RefreshToken({
-                        refreshToken: refreshToken
-                    })
-                    newRefreshToken.save()
-                    res.json({
-                        name: user.name,
-                        userid: user.userid,
-                        phone: user.phone,
-                        role: user.role,
-                        accessToken,
-                        refreshToken,
-                    })
-                }
-                else{
-                    res.status(400).json('incorrect userid or password')
-                }
+app.post('/token', (req, res) => {
+    const refreshToken = req.body.token
+    if(refreshToken === null) return res.status(400).json('you dont have access')
+    RefreshToken.findOne({refreshToken: refreshToken}, (err, ref) => {
+        if(err) throw err
+        if(!ref) res.status(400).json("no such token")
+        jwt.verify(ref, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+            if(err) throw err
+            const accessToken = generateAccessToken({name: user.name, userid: user.userid})
+            res.json({
+                accessToken: accessToken
             })
-        }
+        })
     })
 })
 
-app.post('/logout', verify, async(req, res) => {
-    const token = req.body.token
-    await RefreshToken.deleteOne({refreshToken: token})
-    res.json('success')
+app.delete('/logout', (req, res) => {
+    const refreshToken = req.body.token
+    RefreshToken.deleteOne({refreshToken: refreshToken})
+    res.json("logged out successfully")
 })
 
-// app.get('/dashboard/:id',(req, res) => {
-//     const {id} = req.params
-//     User.findOne({userid: id}, (err, user)=>{
-//         if(err) throw err;
-//         if(!user){
-//             res.status(403).json('no user exists')
-//         }
-//         if(user){
-//             res.json(user)
-//         }
-//     })
-// })
+app.post('/login', (req, res) => {
+    const { userid, password } = req.body
 
-app.post('/create-prefect', async(req, res) => {
-    const prefect = new Prefect(req.body)
-    try{
-        const newPrefect = await prefect.save();
-        res.json(newPrefect)
-    }
-    catch(err){
-        res.status(400).json('couldnt add')
-    }
+    User.findOne({userid: userid}, (err, user) => {
+        if(err) throw err
+        if(!user) res.status(400).json("no user found")
+        bcrypt.compare(password, user.password, (err, result) => {
+            if(err) throw err
+            if(result === true){
+                const accessToken = generateAccessToken(user)
+                const refreshToken = jwt.sign({userid: user.userid, role: user.role}, process.env.REFRESH_TOKEN_SECRET)
+                const newRefreshToken = new RefreshToken({
+                    refreshToken: refreshToken
+                })
+                newRefreshToken.save()
+                res.json({
+                    name: user.name,
+                    userid: user.userid,
+                    phone: user.phone,
+                    role: user.role,
+                    accessToken,
+                    refreshToken,
+                })
+            }
+            else{
+                res.status(400).json("wrong username or password")
+            }
+        })
+    })
 })
+
+function authenticateToken(req, res, next){
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
+    if(token === null){
+        return res.status(400).json('you dont have access')
+    }
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+        if(err) return res.status(403).json("you dont have access")
+        req.user = user
+        next()
+    })
+}
 
 app.get('/list-of-members', async(req, res) => {
     try{
@@ -351,9 +317,48 @@ app.post('/junior-prefect/daily-accounts', async(req, res) => {
     }
 })
 
-// app.listen(process.env.PORT || 3001, ()=>{
-//     console.log(`listening at ${process.env.PORT}`)
-// })
-app.listen('3001', ()=>{
-    console.log(`listening at 3001`)
+app.post('/students/register/:id', async(req, res) => {
+    const {id} = req.params
+    const newRegister = new Register(req.body)
+    try{
+        const register = await newRegister.save()
+        const reg = await Register.find({userid: id})
+        res.json(reg)
+    }
+    catch(err){
+        res.status(400).json("could not create!")
+    }
 })
+
+app.get('/students/register/:id', async(req,res) => {
+    const {id} = req.params
+    try{
+        const reg = await Register.find({userid: id})
+        res.json(reg)
+    }
+    catch(err){
+        res.status(400).json("no records found")
+    }
+})
+
+app.patch('/students/register/:id/:date', async(req, res) => {
+    const { id, date } = req.params
+    console.log(id+" "+date)
+    try{
+        const reg = await Register.findOne({userid: id, check_out_date: date})
+        Object.assign(reg, req.body)
+        await reg.save()
+        const registers = await Register.find({userid: id})
+        res.json(registers)
+    }
+    catch(err){
+        res.status(400).json("could not check in")
+    }
+})
+
+app.listen(process.env.PORT || 3001, ()=>{
+    console.log(`listening at ${process.env.PORT}`)
+})
+// app.listen('3001', ()=>{
+//     console.log(`listening at 3001`)
+// })
