@@ -75,7 +75,7 @@ function Navbar({url,user, loadUser}) {
                         <></>
                     }
                     {
-                        user.role === 'prefect' ? 
+                        user.role === 'prefect' || user.role === 'manager' ? 
                         <Box as={NavLink} to='/prefect' mt={6}  height="50px" cursor='pointer' onClick={onClose} width="100%">
                         <Text fontSize='3xl' color='#FFF' fontWeight='bold' >Prefect</Text>
                         </Box>
