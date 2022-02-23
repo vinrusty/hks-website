@@ -1,4 +1,4 @@
-import { Flex, Text, useMediaQuery, Input, FormLabel, Button } from '@chakra-ui/react'
+import { Flex, Text, useMediaQuery, Input, FormLabel, Button, useToast } from '@chakra-ui/react'
 import axios from 'axios'
 import React,{ useState } from 'react'
 import Navbar from '../Navbar'
@@ -15,6 +15,7 @@ function PersonalDetails({url, id, role}) {
     const [aadhar, setAadhar] = useState('')
     const [roomno, setRoomno] = useState('')
     const [file, setFile] = useState('')
+    const toast = useToast()
 
     const handleSumbitForm = async() => {
         try{
@@ -35,9 +36,24 @@ function PersonalDetails({url, id, role}) {
             }
             )
             const personalDetail = await data.data
+            if(personalDetail.fathername){
+                toast({
+                    title: 'Uploaded Personal Data successfully',
+                    description: "",
+                    status: 'success',
+                    duration: 3000,
+                    isClosable: true,
+                })
+            }
         }
         catch(err){
-
+            toast({
+                title: 'Could not upload please try again',
+                description: "",
+                status: 'error',
+                duration: 3000,
+                isClosable: true,
+            })
         }
     }
 
