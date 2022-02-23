@@ -18,7 +18,6 @@ function Register({url, id, role}) {
         try{
             const data = await axios.get(url+`students/register/${id}`)
             const reg = await data.data
-            console.log(reg)
             setRegister(reg)
         }
         catch(err){
