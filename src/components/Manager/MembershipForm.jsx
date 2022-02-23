@@ -136,11 +136,11 @@ function MembershipForm({url, id, role}) {
         <Text fontSize={islargerthan600 ? '5xl' : '2xl'} color='#FFF'>Hoysala Karnataka sangha membership form</Text>
         <Flex alignItems='center' justifyContent='center' direction='column' width={islargerthan600 ? '80%' : '100%'} padding='2em' boxShadow='xs' borderRadius='30px' marginTop='20px' background='#A6E1FA'>
           <Flex width='100%' alignItems='center' justifyContent='center' direction={islargerthan600 ? 'row' : 'column'}>
-            <Flex direction='column' width='50%' margin='2px'>
+            <Flex direction='column' width='100%' margin='2px'>
                 <FormLabel htmlFor='name'>Name</FormLabel>
                 <Input placeholder='Enter your name' type='text' background='#FFF' onChange={handleNameChange} />
             </Flex>
-            <Flex direction='column' width='50%' margin='2px'>
+            <Flex direction='column' width='100%' margin='2px'>
                 <FormLabel htmlFor='aadhar-no'>Aadhar number</FormLabel>
                 <Input placeholder='Enter your Aadhar number' type='text' background='#FFF' onChange={handleAadharChange} />
             </Flex>
@@ -186,14 +186,14 @@ function MembershipForm({url, id, role}) {
             </Flex>
           </Flex>
           <Flex width='100%' alignItems='center' justifyContent='center' marginTop='10px' direction={islargerthan600 ? 'row' : 'column'}>
-            <Flex direction='column' width='50%' margin='2px'>
+            <Flex direction='column' width='100%' margin='2px'>
                 <FormLabel htmlFor='teloffice'>Telephone no.(office)</FormLabel>
                 <InputGroup>
                     <InputLeftAddon children='+91' />
                     <Input placeholder='Enter your office no.' type='text' background='#FFF' onChange={handleTelPhoneOfficeChange} />
                 </InputGroup>
             </Flex>
-            <Flex direction='column' width='50%' margin='2px'>
+            <Flex direction='column' width='100%' margin='2px'>
                 <FormLabel htmlFor='telhome'>Telephone no.(home)</FormLabel>
                 <InputGroup>
                     <InputLeftAddon children='+91' />

@@ -106,11 +106,11 @@ function PersonalDetails({url, id, role}) {
                 </Flex>
                 
                 <Flex width='100%' alignItems='center' justifyContent='center' direction={islargerthan600 ? 'row' : 'column'}>
-                    <Flex direction='column' width='80%' margin='2px' mt={3}>
+                    <Flex direction='column' width={islargerthan600 ? '80%':'100%'} margin='2px' mt={3}>
                         <FormLabel htmlFor='aadhar'>Aadhar no.</FormLabel>
                         <Input placeholder='Enter your Aadhar no.' type='text' background='#FFF' onChange={handleAadharChange} />
                     </Flex>
-                    <Flex direction='column' width='20%' margin='2px' mt={3}>
+                    <Flex direction='column' width={islargerthan600 ? '20%':'100%'} margin='2px' mt={3}>
                         <FormLabel htmlFor='room-no'>Room number</FormLabel>
                         <Input placeholder='Enter your room number' type='text' background='#FFF' onChange={handleRoomnoChange} />
                     </Flex>
