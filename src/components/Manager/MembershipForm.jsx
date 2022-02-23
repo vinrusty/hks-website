@@ -133,10 +133,10 @@ function MembershipForm({url, id, role}) {
 
   return (
       <Flex alignItems='center' justifyContent='center' direction='column' width='100%' padding='2em' bgGradient='linear(to-l, #7928CA, #FF0080)'>
-        <Text fontSize='5xl' color='#FFF'>Hoysala Karnataka sangha membership form</Text>
+        <Text fontSize={islargerthan600 ? '5xl' : '2xl'} color='#FFF'>Hoysala Karnataka sangha membership form</Text>
         <Flex alignItems='center' justifyContent='center' direction='column' width={islargerthan600 ? '80%' : '100%'} padding='2em' boxShadow='xs' borderRadius='30px' marginTop='20px' background='#A6E1FA'>
           <Flex width='100%' alignItems='center' justifyContent='center'>
-            <Flex direction='column' width='50%' margin='2px'>
+            <Flex direction='column' width='50%' margin='2px' direction={islargerthan600 ? 'column' : 'row'}>
                 <FormLabel htmlFor='name'>Name</FormLabel>
                 <Input placeholder='Enter your name' type='text' background='#FFF' onChange={handleNameChange} />
             </Flex>
@@ -230,20 +230,14 @@ function MembershipForm({url, id, role}) {
                 <FormLabel htmlFor='pin'>Add Picture</FormLabel>
                 <Input type='file' background='gray.100' />
           </Flex>
-          <Flex width='100%' alignItems='center' justifyContent='center' marginTop='10px'>
+          <Flex width='100%' alignItems='center' justifyContent='center' marginTop='10px' direction={islargerthan600 ? 'column' : 'row'}>
             <Flex direction='column' width='50%' margin='2px'>
-                <FormLabel htmlFor='teloffice'>Enter Inroducers name</FormLabel>
-                
-                    
-                    <Input placeholder='Enter introducers name.' type='text' background='#FFF' onChange={handleTelPhoneOfficeChange} />
-                
+                <FormLabel htmlFor='teloffice'>Enter Inroducers name</FormLabel>    
+                <Input placeholder='Enter introducers name.' type='text' background='#FFF' onChange={handleTelPhoneOfficeChange} />
             </Flex>
             <Flex direction='column' width='50%' margin='2px'>
-                <FormLabel htmlFor='telhome'>Membership ID</FormLabel>
-            
-                    
-                    <Input placeholder='Enter membership id.' type='text' background='#FFF' onChange={handleTelPhoneHomeChange} />
-                
+                <FormLabel htmlFor='telhome'>Membership ID</FormLabel>    
+                <Input placeholder='Enter membership id.' type='text' background='#FFF' onChange={handleTelPhoneHomeChange} />
             </Flex>
           </Flex>
           <Flex direction='column' width='100%' margin='2px'>
@@ -254,7 +248,7 @@ function MembershipForm({url, id, role}) {
                 </InputGroup>
           </Flex>
           <Flex width='100%'>
-              <Button onClick={handleSubmitForm} marginTop='10px' width='20%' colorScheme='teal' >Submit</Button>
+              <Button onClick={handleSubmitForm} marginTop='10px' width={islargerthan600 ? '20%' : '100%'} colorScheme='teal' >Submit</Button>
           </Flex>
         </Flex>
       </Flex>

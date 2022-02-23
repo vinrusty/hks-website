@@ -76,22 +76,22 @@ function PersonalDetails({url, id, role}) {
             <Flex marginLeft={islargerthan600 ? '260px':'0px'} width='100%' direction='column' padding='2rem'>
                 <Text fontSize='2xl' textAlign='center'>Upload user personal details</Text>
                 <Flex direction='column' background='#DCD6F7' borderRadius='15px' padding='2rem' mt={5}>
-                <Flex width='100%' alignItems='center' justifyContent='center'>
-                    <Flex direction='column' width='50%' margin='2px' mt={3}>
+                <Flex width='100%' alignItems='center' justifyContent='center' direction={islargerthan600 ? 'column' : 'row'}>
+                    <Flex direction='column' width='100%' margin='2px' mt={3}>
                         <FormLabel htmlFor='fatherName'>Father Name</FormLabel>
                         <Input placeholder='Enter your Father name' type='text' background='#FFF' onChange={handleFathernameChange} />
                     </Flex>
-                    <Flex direction='column' width='50%' margin='2px' mt={3}>
+                    <Flex direction='column' width='100%' margin='2px' mt={3}>
                         <FormLabel htmlFor='f-phone'>Phone number</FormLabel>
                         <Input placeholder='Enter your Father Phone number' type='text' background='#FFF' onChange={handleFatherPhoneChange} />
                     </Flex>
                 </Flex>
-                <Flex width='100%' alignItems='center' justifyContent='center'>
-                    <Flex direction='column' width='50%' margin='2px' mt={3}>
+                <Flex width='100%' alignItems='center' justifyContent='center' direction={islargerthan600 ? 'column' : 'row'}>
+                    <Flex direction='column' width='100%' margin='2px' mt={3}>
                         <FormLabel htmlFor='motherName'>Mother Name</FormLabel>
                         <Input placeholder='Enter your Mother name' type='text' background='#FFF' onChange={handleMothernameChange} />
                     </Flex>
-                    <Flex direction='column' width='50%' margin='2px' mt={3}>
+                    <Flex direction='column' width='100%' margin='2px' mt={3}>
                         <FormLabel htmlFor='aadhar-no'>Phone number</FormLabel>
                         <Input placeholder='Enter your Mother Phone number' type='text' background='#FFF' onChange={handleMotherPhoneChange} />
                     </Flex>
@@ -105,7 +105,7 @@ function PersonalDetails({url, id, role}) {
                     <Input placeholder='Enter your college' type='text' background='#FFF' onChange={handleCollegeChange} />
                 </Flex>
                 
-                <Flex width='100%' alignItems='center' justifyContent='center'>
+                <Flex width='100%' alignItems='center' justifyContent='center' direction={islargerthan600 ? 'column' : 'row'}>
                     <Flex direction='column' width='80%' margin='2px' mt={3}>
                         <FormLabel htmlFor='aadhar'>Aadhar no.</FormLabel>
                         <Input placeholder='Enter your Aadhar no.' type='text' background='#FFF' onChange={handleAadharChange} />
@@ -120,7 +120,7 @@ function PersonalDetails({url, id, role}) {
                     <Input onChange={handleFileChange} placeholder='Add your picture' type='file' background='#FFF' />
                 </Flex>
                 <Flex width='100%'>
-                    <Button marginTop='10px' width='20%' colorScheme='teal' onClick={handleSumbitForm} >Submit</Button>
+                    <Button marginTop='10px' width={islargerthan600 ? '20%' : '100%'} colorScheme='teal' onClick={handleSumbitForm} >Submit</Button>
                 </Flex>
                 </Flex>
             </Flex>

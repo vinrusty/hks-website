@@ -174,7 +174,7 @@ function LoginForm({url,loadUser}) {
                             <ModalBody>
                             <Flex direction='column'>
                                 <FormLabel htmlFor='name'>Name</FormLabel>
-                                    <Input onChange={handleStudentNameChange} name='name' id='name' type='text' variant='outline' placeholder='Enter Prefect Name' mt={1}></Input>
+                                    <Input onChange={handleStudentNameChange} name='name' id='name' type='text' variant='outline' placeholder='Enter Student Name' mt={1}></Input>
                                 <FormLabel htmlFor='phone-no'>Phone </FormLabel>
                                     <Input onChange={handleStudentPhoneChange} name='phone-no' id='phone-no' type='text' variant='outline' placeholder='Enter Prefect Phone No.' mt={2}></Input>
                                 <FormLabel htmlFor='user-id'>User ID </FormLabel>
