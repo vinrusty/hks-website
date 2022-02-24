@@ -4,7 +4,7 @@ import React,{ useState } from 'react'
 import Navbar from '../Navbar'
 import Sidebar from '../Sidebar'
 
-function PersonalDetails({url, id, role}) {
+function PersonalDetails({url, id, role, username, userphone}) {
     const [islargerthan600] = useMediaQuery('(min-width: 600px)')
     const [fname, setFname] = useState('')
     const [mname, setMname] = useState('')
@@ -20,6 +20,8 @@ function PersonalDetails({url, id, role}) {
     const handleSumbitForm = async() => {
         try{
             const formData = new FormData()
+            formData.append("name", username)
+            formData.append("phone", userphone)
             formData.append("fathername", fname)
             formData.append("mothername", mname)
             formData.append("fphone", fphone)
@@ -94,7 +96,7 @@ function PersonalDetails({url, id, role}) {
         setRoomno(event.target.value);
     }
     const handleFileChange = (event) => {
-        setFile(event.target.file[0])
+        setFile(event.target.files[0])
     }
 
   return (

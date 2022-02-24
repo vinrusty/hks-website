@@ -16,13 +16,14 @@ import JuniorPrefect from './components/Junior Prefect/JuniorPrefect';
 import DailyAccounts from './components/Junior Prefect/DailyAccounts';
 import PersonalDetails from './components/Students/PersonalDetails';
 import Register from './components/Students/Register';
+import HostelStudents from './components/Prefect/HostelStudents';
 import './App.css';
 import Navbar from './components/Navbar';
 
 function App() {
 
-  const URL = 'https://rocky-reef-88825.herokuapp.com/'
-  // const URL = 'http://localhost:3001/'
+  // const URL = 'https://rocky-reef-88825.herokuapp.com/'
+  const URL = 'http://localhost:3001/'
   const [user, setUser] = useState({})
 
   const loadUser = (user) => {
@@ -64,6 +65,7 @@ function App() {
         <Route path='/prefect/ration-list/:date' element={<MonthlyRationList url={URL} id={user.userid} role={user.role} />} />
         <Route path='/students' element={<Students url={URL} id={user.userid} role={user.role} />} />
         <Route path='/junior-prefect' element={<JuniorPrefect url={URL} id={user.userid} role={user.role} />} />
+        <Route path='/prefect/hostel-students' element={<HostelStudents url={URL} id={user.userid} role={user.role} />} />
         <Route path='/junior-prefect/daily-accounts' element={<DailyAccounts url={URL} id={user.userid} role={user.role} />} />
         <Route path='/students/personal-details' element={<PersonalDetails url={URL} id={user.userid} role={user.role} username={user.name} userphone={user.phone} />} />
         <Route path='/students/registar' element={<Register url={URL} id={user.userid} role={user.role} username={user.name} userphone={user.phone} />} />

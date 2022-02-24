@@ -33,7 +33,7 @@ function Prefect({id, role}) {
                         Prefect Monthly Accounts
                     </Text>
                 </Flex>
-                <Flex alignItems='center' justifyContent='center' bg='#DCE1E9' height='250px' borderRadius='10px' boxShadow='md'>
+                <Flex as={Link} to='/prefect/hostel-students' alignItems='center' justifyContent='center' bg='#DCE1E9' height='250px' borderRadius='10px' boxShadow='md'>
                     <Text fontSize={islargerthan600 ? '2xl':'1xl'}>
                         Hostel Students
                     </Text>
