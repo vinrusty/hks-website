@@ -19,18 +19,30 @@ function PersonalDetails({url, id, role}) {
 
     const handleSumbitForm = async() => {
         try{
+            const formData = new FormData()
+            formData.append("fathername", fname)
+            formData.append("mothername", mname)
+            formData.append("fphone", fphone)
+            formData.append("mphone", mphone)
+            formData.append("address", address)
+            formData.append("college", college)
+            formData.append("aadhar_no", aadhar)
+            formData.append("room_no", roomno)
+            formData.append("studentImage", file)
+
             const data = await axios.post(url+'personal-details',
-            {
-                fathername: fname,
-                mothername: mname,
-                fphone: fphone,
-                mphone: mphone,
-                address: address,
-                college: college,
-                aadhar_no: aadhar,
-                room_no: roomno,
-                studentImage: file
-            },
+            // {
+            //     fathername: fname,
+            //     mothername: mname,
+            //     fphone: fphone,
+            //     mphone: mphone,
+            //     address: address,
+            //     college: college,
+            //     aadhar_no: aadhar,
+            //     room_no: roomno,
+            //     studentImage: formData["file"]
+            // },
+            formData,
             {
                 headers: {'Content-Type':'application/json'}
             }

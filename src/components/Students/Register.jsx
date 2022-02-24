@@ -15,15 +15,28 @@ function Register({url, id, role}) {
 
   useEffect(() => {
     const fetchRegister = async() => {
-        try{
-            const data = await axios.get(url+`students/register/${id}`)
-            const reg = await data.data
-            setRegister(reg)
+        if(role === 'manager'){
+            try{
+                const data = await axios.get(url+'students/register')
+                const reg = await data.data
+                setRegister(reg)
+                console.log(reg)
+            }
+            catch(err){
+                console.log(err)
+            }
         }
-        catch(err){
-            console.log(err)
+        else{
+            try{
+                const data = await axios.get(url+`students/register/${id}`)
+                const reg = await data.data
+                setRegister(reg)
+            }
+            catch(err){
+                console.log(err)
+            }
+        }   
         }
-    }
     fetchRegister()
   },[])
 
@@ -155,7 +168,12 @@ function Register({url, id, role}) {
                         <th className='register-table-head'>Place and Reason</th>
                         <th className='register-table-head'>Date of arrival</th>
                         <th className='register-table-head'>Time</th>
-                        <th className='register-table-head'>Check In</th>
+                        {
+                            role === 'manager' || role ==='prefect' ?
+                            <></>
+                            :
+                            <th className='register-table-head'>Check In</th>
+                        }
                     </tr>
                 </thead>
                 <tbody>
@@ -170,7 +188,12 @@ function Register({url, id, role}) {
                                 <td className='register-table-head'>{reg.place_reason}</td>
                                 <td className='register-table-head'>{reg.check_in_date}</td>
                                 <td className='register-table-head'>{reg.check_in_time}</td>
-                                <td className='register-table-head'><Button colorScheme='linkedin' disabled={!reg.check_in_flag} onClick={() => handleCheckIn(reg)}><CheckIcon w={6} h={6}/></Button></td>
+                                {
+                                    role === 'manager' || role === 'prefect' ?
+                                    <></>
+                                    :
+                                    <td className='register-table-head'><Button colorScheme='linkedin' disabled={!reg.check_in_flag} onClick={() => handleCheckIn(reg)}><CheckIcon w={6} h={6}/></Button></td>
+                                }
                                </tr>
                            )
                        })

@@ -116,7 +116,17 @@ function MonthlyAccounts({url, id, role}) {
           })
       }
       </SimpleGrid>
-      <Button width={islargerthan600 ? '10%':'30%'} margin='20px' colorScheme='teal' onClick={() => setOpen(true)}>Create</Button>  
+      {
+          role === 'manager' ?
+          <></>
+          :
+          (
+              role === 'prefect' ?
+                <Button width={islargerthan600 ? '10%':'30%'} margin='20px' colorScheme='teal' onClick={() => setOpen(true)}>Create</Button>
+                :
+                <></>
+          )
+      }
       </Flex>
       <AlertDialog
             isOpen={Open}

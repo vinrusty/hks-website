@@ -60,7 +60,7 @@ function App() {
         <Route path='/list-of-members/:id' element={<Member url={URL} id={user.userid} role={user.role} />} />
         <Route path='/prefect/monthly-accounts' element={<MonthlyAccounts url={URL} id={user.userid} role={user.role} />} />
         <Route path='/prefect/monthly-accounts/:id' element={<AccountDetails url={URL} userid={user.userid} role={user.role} />} />
-        <Route path='/prefect/ration-list' element={<RationList url={URL} id={user.userid} />} />
+        <Route path='/prefect/ration-list' element={<RationList url={URL} id={user.userid} role={user.role} />} />
         <Route path='/prefect/ration-list/:date' element={<MonthlyRationList url={URL} id={user.userid} role={user.role} />} />
         <Route path='/students' element={<Students url={URL} id={user.userid} role={user.role} />} />
         <Route path='/junior-prefect' element={<JuniorPrefect url={URL} id={user.userid} role={user.role} />} />

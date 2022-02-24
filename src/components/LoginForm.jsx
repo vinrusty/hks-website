@@ -176,7 +176,7 @@ function LoginForm({url,loadUser}) {
                                 <FormLabel htmlFor='name'>Name</FormLabel>
                                     <Input onChange={handleStudentNameChange} name='name' id='name' type='text' variant='outline' placeholder='Enter Student Name' mt={1}></Input>
                                 <FormLabel htmlFor='phone-no'>Phone </FormLabel>
-                                    <Input onChange={handleStudentPhoneChange} name='phone-no' id='phone-no' type='text' variant='outline' placeholder='Enter Prefect Phone No.' mt={2}></Input>
+                                    <Input onChange={handleStudentPhoneChange} name='phone-no' id='phone-no' type='text' variant='outline' placeholder='Enter Phone No.' mt={2}></Input>
                                 <FormLabel htmlFor='user-id'>User ID </FormLabel>
                                     <Input onChange={handleUseridChange} name='user-id' id='user-id' type='text' variant='outline' placeholder='Enter User ID' mt={2}></Input>
                                 <FormLabel htmlFor='password'>Password </FormLabel>
