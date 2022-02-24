@@ -1,14 +1,14 @@
 const mongoose = require('mongoose')
 
 const PersonalDetail = new mongoose.Schema({
-    // name: {
-    //     type:String,
-    //     required: true
-    // },
-    // phone:{
-    //     type: String,
-    //     required: true
-    // },
+    name: {
+        type:String,
+        required: true
+    },
+    phone:{
+        type: String,
+        required: true
+    },
     fathername: {
         type: String,
         required: [true, 'father name field is required!']

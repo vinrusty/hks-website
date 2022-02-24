@@ -49,7 +49,7 @@ const storage = multer.diskStorage({
 })
 
 const fileFilter = (req, file, cb) => {
-    if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){
+    if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg'){
         cb(null, true);
     }
     else{
@@ -240,7 +240,12 @@ app.put('/create-ration-list/:date', async(req, res) => {
 })
 
 app.post('/personal-details', upload.single('studentImage'), async(req, res) => {
+    const { studentImage } = req.body
+    console.log(req.body.name)
+    console.log("student image: "+ req.file)
     const personalDetail = new PersonalDetail({
+        name: req.body.name,
+        phone: req.body.phone,
         fathername: req.body.fathername,
         mothername: req.body.mothername,
         fphone: req.body.fphone,
@@ -327,6 +332,16 @@ app.post('/students/register/:id', async(req, res) => {
     }
     catch(err){
         res.status(400).json("could not create!")
+    }
+})
+
+app.get('/students/register', async(req,res)=>{
+    try{
+        const register = await Register.find({})
+        res.json(register)
+    }
+    catch(err){
+        res.status(400).json("no records found")
     }
 })
 
