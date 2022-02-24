@@ -22,8 +22,8 @@ import Navbar from './components/Navbar';
 
 function App() {
 
-  // const URL = 'https://rocky-reef-88825.herokuapp.com/'
-  const URL = 'http://localhost:3001/'
+  const URL = 'https://rocky-reef-88825.herokuapp.com/'
+  // const URL = 'http://localhost:3001/'
   const [user, setUser] = useState({})
 
   const loadUser = (user) => {
