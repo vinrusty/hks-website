@@ -1,5 +1,5 @@
 import { Button, Flex, useDisclosure, Input, FormLabel, useMediaQuery, useToast } from '@chakra-ui/react';
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import {
     Table,
     Thead,
@@ -47,6 +47,21 @@ function CreateUser({url, id, role}) {
         setPassword(event.target.value)
     }
 
+    useEffect(() => {
+        const fetchPrefect = async() => {
+            try{
+                const data = await axios.get(url+'users/prefect')
+                const fetchedPrefect = await data.data
+                console.log(fetchedPrefect)
+                setPrefect(fetchedPrefect)
+            }
+            catch(err){
+                console.log(err)
+            }
+        }
+        fetchPrefect()
+    },[])
+
     const handleSubmitForm = async() => {
         try{
             const data = await axios.post(url+'create-user',{
@@ -61,7 +76,7 @@ function CreateUser({url, id, role}) {
             })
             const fetchedPrefect = await data.data
             if(fetchedPrefect.name){
-                setPrefect(fetchedPrefect)
+                setPrefect(...prefect, fetchedPrefect)
                 toast({
                     title: 'Added Prefect successfully',
                     description: "",
@@ -108,12 +123,18 @@ function CreateUser({url, id, role}) {
                 </Tr>
             </Thead>
             <Tbody>
-                <Tr>
-                    <Td>Feb</Td>
-                    <Td>{prefect.name}</Td>
-                    <Td>{prefect.phone}</Td>
-                    <Td>{prefect.userid}</Td>
-                </Tr>
+            {
+                prefect && prefect.map((p, index) => {
+                    return(
+                    <Tr>
+                        <Td>Feb</Td>
+                        <Td>{p.name}</Td>
+                        <Td>{p.phone}</Td>
+                        <Td>{p.userid}</Td>
+                    </Tr>
+                    )
+                })
+            }
             </Tbody>
           </Table>
           <Button onClick={onOpen} width={islargerthan600?'20%':'100%'} colorScheme='pink'>Add</Button>
