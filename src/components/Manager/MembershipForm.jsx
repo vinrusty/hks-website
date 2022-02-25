@@ -124,12 +124,13 @@ function MembershipForm({url, id, role}) {
 
       
     try{
-        const data = await axios.post(url+"register",
+        const data = await axios.post(url+"register-member",
         formData,
         {
             headers:{'Content-Type':'application/json'}
         })
         const Member = await data.data
+        console.log(Member)
         if(Member){
             toast({
                 title: 'Registered Successfully!',
