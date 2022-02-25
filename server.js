@@ -31,8 +31,8 @@ try{
 catch(e){
     console.log("coudn't connect :(")
 }
-// const origin = 'http://localhost:3000'
-const origin = 'https://hks-website-7f1d3.web.app'
+const origin = 'http://localhost:3000'
+// const origin = 'https://hks-website-7f1d3.web.app'
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors({origin: origin,
@@ -92,10 +92,10 @@ app.post('/register-member', upload.single('member_pic'), async(req, res) => {
             p_city: req.body.p_city,
             p_state: req.body.p_state,
             p_pin: req.body.p_pin,
-            member_pic: req.file.path,
             intro_name: req.body.intro_name,
             intro_phone: req.body.intro_phone,
-            intro_id: req.body.intro_id
+            intro_id: req.body.intro_id,
+            member_pic: req.file.path,
         }
     )
     try{
@@ -103,6 +103,7 @@ app.post('/register-member', upload.single('member_pic'), async(req, res) => {
         res.json(newMember);
     }
     catch(err){
+        console.log(err)
         res.status(400).json('could not register')
     }
 })
@@ -196,6 +197,17 @@ function authenticateToken(req, res, next){
         next()
     })
 }
+
+app.get('/users/:role', async(req, res) => {
+    const {role} = req.params
+    try{
+        const fetchedUser = await User.find({role: role})
+        res.json(fetchedUser)
+    }
+    catch(err){
+        res.status(400).json("no user found")
+    }
+})
 
 app.get('/list-of-members', async(req, res) => {
     try{
@@ -392,9 +404,9 @@ app.patch('/students/register/:id/:date', async(req, res) => {
     }
 })
 
-app.listen(process.env.PORT, ()=>{
-    console.log(`listening at ${process.env.PORT}`)
-})
-// app.listen('3001', ()=>{
-//     console.log(`listening at 3001`)
+// app.listen(process.env.PORT, ()=>{
+//     console.log(`listening at ${process.env.PORT}`)
 // })
+app.listen('3001', ()=>{
+    console.log(`listening at 3001`)
+})
