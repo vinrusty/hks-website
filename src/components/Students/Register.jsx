@@ -15,7 +15,7 @@ function Register({url, id, role}) {
 
   useEffect(() => {
     const fetchRegister = async() => {
-        if(role === 'manager'){
+        if(role === 'manager' || role === 'prefect'){
             try{
                 const data = await axios.get(url+'students/register')
                 const reg = await data.data
@@ -155,9 +155,14 @@ function Register({url, id, role}) {
                 <Input placeholder='Enter Place and reason' type='text' background='#FFF' onChange={handlePlaceReasonChange}  />
             </Flex>
             </Flex>
-            <Flex paddingLeft='1rem'>
-                <Button colorScheme='green' margin='2px' mt={3} onClick={handleCheckOut}>Check Out</Button>
-            </Flex>
+            {
+                role === 'student' ?
+                <Flex paddingLeft='1rem'>
+                    <Button colorScheme='green' margin='2px' mt={3} onClick={handleCheckOut}>Check Out</Button>
+                </Flex>
+                :
+                <></>
+            }
             <table className='register-table'>
                 <thead>
                     <tr className='register-table-head'>
