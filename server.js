@@ -31,8 +31,8 @@ try{
 catch(e){
     console.log("coudn't connect :(")
 }
-// const origin = 'http://localhost:3000'
-const origin = 'https://hks-website-7f1d3.web.app'
+const origin = 'http://localhost:3000'
+// const origin = 'https://hks-website-7f1d3.web.app'
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors({origin: origin,
@@ -78,6 +78,7 @@ app.post('/register-member', upload.single('member_pic'), async(req, res) => {
             age: req.body.age,
             birth_place: req.body.birth_place,
             gothra: req.body.gothra,
+            veda: req.body.veda,
             father_name: req.body.father_name,
             husband_or_wife_name: req.body.husband_or_wife_name,
             home_address: req.body.home_address,
@@ -115,7 +116,7 @@ app.post('/create-user', (req, res) => {
             res.json('User already exists')
         }
         if(!doc){
-            const hashedPassword = await bcrypt.hash(req.body.password, 10)
+            const hashedPassword = await bcrypt.hashSync(req.body.password, 10)
             const newUser = new User({
                 name: req.body.name,
                 userid: req.body.userid,
@@ -161,28 +162,25 @@ app.post('/login', (req, res) => {
     User.findOne({userid: userid}, (err, user) => {
         if(err) throw err
         if(!user) res.status(400).json("no user found")
-        bcrypt.compare(password, user.password, (err, result) => {
-            if(err) throw err
-            if(result === true){
-                const accessToken = generateAccessToken(user)
-                const refreshToken = jwt.sign({userid: user.userid, role: user.role}, process.env.REFRESH_TOKEN_SECRET)
-                const newRefreshToken = new RefreshToken({
-                    refreshToken: refreshToken
-                })
-                newRefreshToken.save()
-                res.json({
-                    name: user.name,
-                    userid: user.userid,
-                    phone: user.phone,
-                    role: user.role,
-                    accessToken,
-                    refreshToken,
-                })
-            }
-            else{
-                res.status(400).json("wrong username or password")
-            }
-        })
+        if(user && bcrypt.compareSync(password, user.password)){
+            const accessToken = generateAccessToken(user)
+            const refreshToken = jwt.sign({userid: user.userid, role: user.role}, process.env.REFRESH_TOKEN_SECRET)
+            const newRefreshToken = new RefreshToken({
+                refreshToken: refreshToken
+            })
+            newRefreshToken.save()
+            res.json({
+                name: user.name,
+                userid: user.userid,
+                phone: user.phone,
+                role: user.role,
+                accessToken,
+                refreshToken,
+            })
+        }
+        else{
+            res.status(400).json("wrong username or password")
+        }
     })
 })
 
@@ -394,9 +392,9 @@ app.patch('/students/register/:id/:date', async(req, res) => {
     }
 })
 
-app.listen(process.env.PORT, ()=>{
-    console.log(`listening at ${process.env.PORT}`)
-})
-// app.listen('3001', ()=>{
-//     console.log(`listening at 3001`)
+// app.listen(process.env.PORT, ()=>{
+//     console.log(`listening at ${process.env.PORT}`)
 // })
+app.listen('3001', ()=>{
+    console.log(`listening at 3001`)
+})

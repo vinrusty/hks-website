@@ -17,6 +17,10 @@ const Member = new mongoose.Schema({
         type: String,
         required: [true, '#']
     },
+    veda: {
+        type: String,
+        required: true
+    },
     gothra: {
         type: String,
         required: [true, '#']
