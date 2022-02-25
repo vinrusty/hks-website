@@ -84,7 +84,7 @@ app.post('/register', upload.single('member_pic'), async(req, res) => {
             city: req.body.city,
             state: req.body.state,
             pin: req.body.pin,
-            tel_no_office: req.body.tel_phone_office,
+            tel_no_office: req.body.tel_no_office,
             tel_no_home: req.body.tel_no_home,
             phone: req.body.phone,
             permanent_address: req.body.permanent_address,
