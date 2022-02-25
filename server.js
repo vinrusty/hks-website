@@ -161,30 +161,28 @@ app.post('/login', (req, res) => {
     User.findOne({userid: userid}, (err, user) => {
         if(err) throw err
         if(!user) res.status(400).json("no user found")
-        if(user){
-            bcrypt.compare(password, user.password, (err, result) => {
-                if(err) throw err
-                if(result === true){
-                    const accessToken = generateAccessToken(user)
-                    const refreshToken = jwt.sign({userid: user.userid, role: user.role}, process.env.REFRESH_TOKEN_SECRET)
-                    const newRefreshToken = new RefreshToken({
-                        refreshToken: refreshToken
-                    })
-                    newRefreshToken.save()
-                    res.json({
-                        name: user.name,
-                        userid: user.userid,
-                        phone: user.phone,
-                        role: user.role,
-                        accessToken,
-                        refreshToken,
-                    })
-                }
-                else{
-                    res.status(400).json("wrong username or password")
-                }
-            })
-        }
+        bcrypt.compare(password, user.password, (err, result) => {
+            if(err) throw err
+            if(result === true){
+                const accessToken = generateAccessToken(user)
+                const refreshToken = jwt.sign({userid: user.userid, role: user.role}, process.env.REFRESH_TOKEN_SECRET)
+                const newRefreshToken = new RefreshToken({
+                    refreshToken: refreshToken
+                })
+                newRefreshToken.save()
+                res.json({
+                    name: user.name,
+                    userid: user.userid,
+                    phone: user.phone,
+                    role: user.role,
+                    accessToken,
+                    refreshToken,
+                })
+            }
+            else{
+                res.status(400).json("wrong username or password")
+            }
+        })
     })
 })
 
