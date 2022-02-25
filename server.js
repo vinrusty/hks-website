@@ -70,7 +70,7 @@ app.get('/', (req,res)=>{
     res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS")
 })
 
-app.post('/register', upload.single('memberImage'), async(req, res) => {
+app.post('/register', upload.single('member_pic'), async(req, res) => {
     const member = new Member(
         {
             name: req.body.name,
