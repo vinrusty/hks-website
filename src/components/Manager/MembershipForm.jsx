@@ -22,6 +22,10 @@ function MembershipForm({url, id, role}) {
   const [PermanentCity, setPermanentCity] = useState('');
   const [PermanentState, setPermanentState] = useState('');
   const [PermanentPin, setPermanentPin] = useState('');
+  const [member_pic, setMember_pic] = useState('')
+  const [introducername, setIntroducername] = useState('');
+  const [introducermemberid, setIntroducermemberid] = useState('');
+  const [introducermemberphone, setIntroducermemberphone] = useState('');
   const toast = useToast()
   const [islargerthan600] = useMediaQuery('(min-width: 600px)')
 
@@ -79,30 +83,49 @@ function MembershipForm({url, id, role}) {
   const handlePermanentPinChange = (event) =>{
       setPermanentPin(event.target.value);
   }
+  const handleIndroducersname = (event) => {
+      setIntroducername(event.target.name)
+  }
+  const handleIndroducersphone = (event) => {
+      setIntroducermemberphone(event.target.name)
+  }
+  const handleIndroducersmemberid = (event) => {
+      setIntroducermemberid(event.target.name)
+  }
+  const handlememberpic = (event) => {
+      setMember_pic(event.target.files[0])
+  }
 
   const handleSubmitForm = async() =>{
+    const formData = new FormData()
+    formData.append("name",name)
+    formData.append("aadhar_no",aadhar)
+    formData.append("age",age)
+    formData.append("birth_place",name)
+    formData.append("gothra",Gothra)
+    formData.append("father_name",fathername)
+    formData.append("husband_or_wife_name",husbandorwifename)
+    formData.append("home_address",HomeAddress)
+    formData.append("city",City)
+    formData.append("state", State)
+    formData.append("pin", Pin)
+    formData.append("tel_no_office", TelPhoneOffice)
+    formData.append("tel_no_home", TelPhoneHome)
+    formData.append("phone", Mobileno)
+    formData.append("permanent_address", PermanentAddress)
+    formData.append("p_city", PermanentCity)
+    formData.append("p_state", PermanentState)
+    formData.append("p_pin", PermanentPin)
+    formData.append("member_pic", member_pic)
+    formData.append("intro_name", introducername)
+    formData.append("intro_phone", introducermemberphone)
+    formData.append("intro_id", introducermemberid)
+
+
+      
     try{
         const data = await axios.post(url+"register",
-        {
-            name: name,
-            aadhar_no: aadhar,
-            age: age,
-            birth_place: placeofbirth,
-            gothra: Gothra,
-            father_name: fathername,
-            husband_or_wife_name: husbandorwifename,
-            home_address: HomeAddress,
-            city: City,
-            state: State,
-            pin: Pin,
-            tel_no_office: TelPhoneOffice,
-            tel_no_home: TelPhoneHome,
-            phone: Mobileno,
-            permanent_address: PermanentAddress,
-            p_city: PermanentCity,
-            p_state: PermanentState,
-            p_pin: PermanentPin
-        },
+        formData,
         {
             headers:{'Content-Type':'application/json'}
         })
@@ -228,23 +251,23 @@ function MembershipForm({url, id, role}) {
           </Flex>
           <Flex direction='column' width='100%' margin='2px'>
                 <FormLabel htmlFor='pin'>Add Picture</FormLabel>
-                <Input type='file' background='gray.100' />
+                <Input onChange={handlememberpic} type='file' background='gray.100' />
           </Flex>
           <Flex width='100%' alignItems='center' justifyContent='center' marginTop='10px' direction={islargerthan600 ? 'row' : 'column'}>
             <Flex direction='column' width='100%' margin='2px'>
                 <FormLabel htmlFor='teloffice'>Enter Inroducers name</FormLabel>    
-                <Input placeholder='Enter introducers name.' type='text' background='#FFF' onChange={handleTelPhoneOfficeChange} />
+                <Input placeholder='Enter introducers name.' type='text' background='#FFF' onChange={handleIndroducersname} />
             </Flex>
             <Flex direction='column' width='100%' margin='2px'>
                 <FormLabel htmlFor='telhome'>Membership ID</FormLabel>    
-                <Input placeholder='Enter membership id.' type='text' background='#FFF' onChange={handleTelPhoneHomeChange} />
+                <Input placeholder='Enter membership id.' type='text' background='#FFF' onChange={handleIndroducersmemberid} />
             </Flex>
           </Flex>
           <Flex direction='column' width='100%' margin='2px'>
                 <FormLabel htmlFor='pin'>Member Phone no.</FormLabel>
                 <InputGroup>
                 <InputLeftAddon children='+91' />
-                <Input type='text' placeholder='Enter member phone no.' background='gray.100' />
+                <Input onChange={handleIndroducersphone} type='text' placeholder='Enter member phone no.' background='gray.100' />
                 </InputGroup>
           </Flex>
           <Flex width='100%'>

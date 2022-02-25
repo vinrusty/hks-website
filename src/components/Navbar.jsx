@@ -34,7 +34,7 @@ function Navbar({url,user, loadUser}) {
                 <img src='/images/logo.png' alt='sangha logo' style={{width:'60px'}} />
                 <Flex marginLeft='auto' alignItems='center'>
                 <Box as={NavLink} to='/dashboard'>
-                    <Text fontSize={islargerthan600 ? 'xl':'1em'} m={3} color='white'>Home</Text>
+                    {/* <Text fontSize={islargerthan600 ? 'xl':'1em'} m={3} color='white'>Home</Text> */}
                 </Box>
                 <Box>
                     <Button onClick={handleLogout} colorScheme='blue' fontSize={islargerthan600 ? 'xl':'1em'} m={3} color='white'>Sign Out</Button>
