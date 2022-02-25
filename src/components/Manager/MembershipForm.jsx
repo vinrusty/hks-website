@@ -12,6 +12,7 @@ function MembershipForm({url, id, role}) {
   const [fathername, setFathername] = useState('');
   const [husbandorwifename, setHusbandorwifename] = useState('');
   const [HomeAddress, setHomeAddress] = useState('');
+  const [veda, setVeda] = useState('');
   const [City, setCity] = useState('');
   const [State, setState] = useState('');
   const [Pin, setPin] = useState('');
@@ -84,53 +85,54 @@ function MembershipForm({url, id, role}) {
       setPermanentPin(event.target.value);
   }
   const handleIndroducersname = (event) => {
-      setIntroducername(event.target.name)
+      setIntroducername(event.target.value)
   }
   const handleIndroducersphone = (event) => {
-      setIntroducermemberphone(event.target.name)
+      setIntroducermemberphone(event.target.value)
   }
   const handleIndroducersmemberid = (event) => {
-      setIntroducermemberid(event.target.name)
+      setIntroducermemberid(event.target.value)
   }
   const handlememberpic = (event) => {
       setMember_pic(event.target.files[0])
   }
+  const handleVedaChange = (event) => {
+      setVeda(event.target.value)
+  }
 
   const handleSubmitForm = async() =>{
-    const formData = new FormData()
-    formData.append("name",name)
-    formData.append("aadhar_no",aadhar)
-    formData.append("age",age)
-    formData.append("birth_place",name)
-    formData.append("gothra",Gothra)
-    formData.append("father_name",fathername)
-    formData.append("husband_or_wife_name",husbandorwifename)
-    formData.append("home_address",HomeAddress)
-    formData.append("city",City)
-    formData.append("state", State)
-    formData.append("pin", Pin)
-    formData.append("tel_no_office", TelPhoneOffice)
-    formData.append("tel_no_home", TelPhoneHome)
-    formData.append("phone", Mobileno)
-    formData.append("permanent_address", PermanentAddress)
-    formData.append("p_city", PermanentCity)
-    formData.append("p_state", PermanentState)
-    formData.append("p_pin", PermanentPin)
-    formData.append("member_pic", member_pic)
-    formData.append("intro_name", introducername)
-    formData.append("intro_phone", introducermemberphone)
-    formData.append("intro_id", introducermemberid)
-
-
       
-    try{
+      try{
+        const formData = new FormData()
+        formData.append("name",name)
+        formData.append("aadhar_no",aadhar)
+        formData.append("age",age)
+        formData.append("birth_place",placeofbirth)
+        formData.append("gothra",Gothra)
+        formData.append("veda",veda)
+        formData.append("father_name",fathername)
+        formData.append("husband_or_wife_name",husbandorwifename)
+        formData.append("home_address",HomeAddress)
+        formData.append("city",City)
+        formData.append("state", State)
+        formData.append("pin", Pin)
+        formData.append("tel_no_office", TelPhoneOffice)
+        formData.append("tel_no_home", TelPhoneHome)
+        formData.append("phone", Mobileno)
+        formData.append("permanent_address", PermanentAddress)
+        formData.append("p_city", PermanentCity)
+        formData.append("p_state", PermanentState)
+        formData.append("p_pin", PermanentPin)
+        formData.append("member_pic", member_pic)
+        formData.append("intro_name", introducername)
+        formData.append("intro_phone", introducermemberphone)
+        formData.append("intro_id", introducermemberid)
         const data = await axios.post(url+"register-member",
         formData,
         {
             headers:{'Content-Type':'application/json'}
         })
         const Member = await data.data
-        console.log(Member)
         if(Member){
             toast({
                 title: 'Registered Successfully!',
@@ -182,6 +184,10 @@ function MembershipForm({url, id, role}) {
                 <FormLabel htmlFor='gotra'>Gothra</FormLabel>
                 <Input placeholder='Enter your Gothra' type='text' background='#FFF' onChange={handleGothraChange} />
             </Flex>
+          </Flex>
+          <Flex direction='column' width='100%' margin='2px'>
+            <FormLabel htmlFor='veda'>Veda</FormLabel>
+            <Input placeholder='Enter your Veda' type='text' background='#FFF' onChange={handleVedaChange} />
           </Flex>
           <Flex direction='column' width='100%' margin='2px' marginTop='10px'>
             <FormLabel htmlFor='fathername'>Father's Name</FormLabel>
