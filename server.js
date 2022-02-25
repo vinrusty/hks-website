@@ -70,8 +70,33 @@ app.get('/', (req,res)=>{
     res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS")
 })
 
-app.post('/register', async(req, res) => {
-    const member = new Member(req.body)
+app.post('/register', upload.single('memberImage'), async(req, res) => {
+    const member = new Member(
+        {
+            name: req.body.name,
+            aadhar_no: req.body.aadhar_no,
+            age: req.body.age,
+            birth_place: req.body.birth_place,
+            gothra: req.body.gothra,
+            father_name: req.body.father_name,
+            husband_or_wife_name: req.body.husband_or_wife_name,
+            home_address: req.body.home_address,
+            city: req.body.city,
+            state: req.body.state,
+            pin: req.body.pin,
+            tel_no_office: req.body.tel_phone_office,
+            tel_no_home: req.body.tel_no_home,
+            phone: req.body.phone,
+            permanent_address: req.body.permanent_address,
+            p_city: req.body.p_city,
+            p_state: req.body.p_state,
+            p_pin: req.body.p_pin,
+            member_pic: req.file.path,
+            intro_name: req.body.intro_name,
+            intro_phone: req.body.intro_phone,
+            intro_id: req.body.intro_id
+        }
+    )
     try{
         const newMember = await member.save();
         res.json(newMember);
@@ -241,8 +266,6 @@ app.put('/create-ration-list/:date', async(req, res) => {
 
 app.post('/personal-details', upload.single('studentImage'), async(req, res) => {
     const { studentImage } = req.body
-    console.log(req.body.name)
-    console.log("student image: "+ req.file)
     const personalDetail = new PersonalDetail({
         name: req.body.name,
         phone: req.body.phone,

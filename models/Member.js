@@ -64,6 +64,22 @@ const Member = new mongoose.Schema({
         type: String,
         required: [true, '#']
     },
+    member_pic:{
+        type: String,
+        required: true
+    },
+    intro_name:{
+        type: String,
+        required: true
+    },
+    intro_phone:{
+        type: String,
+        required: true
+    },
+    intro_id:{
+        type: String,
+        required: true
+    },
 })
 
 module.exports  = mongoose.model("Member", Member);
