@@ -70,7 +70,7 @@ app.get('/', (req,res)=>{
     res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS")
 })
 
-app.post('/register', upload.single('member_pic'), async(req, res) => {
+app.post('/register-member', upload.single('member_pic'), async(req, res) => {
     const member = new Member(
         {
             name: req.body.name,
@@ -394,7 +394,7 @@ app.patch('/students/register/:id/:date', async(req, res) => {
     }
 })
 
-app.listen(process.env.PORT || 3001, ()=>{
+app.listen(process.env.PORT, ()=>{
     console.log(`listening at ${process.env.PORT}`)
 })
 // app.listen('3001', ()=>{
