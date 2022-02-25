@@ -31,8 +31,8 @@ try{
 catch(e){
     console.log("coudn't connect :(")
 }
-const origin = 'http://localhost:3000'
-// const origin = 'https://hks-website-7f1d3.web.app'
+// const origin = 'http://localhost:3000'
+const origin = 'https://hks-website-7f1d3.web.app'
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors({origin: origin,
@@ -392,9 +392,9 @@ app.patch('/students/register/:id/:date', async(req, res) => {
     }
 })
 
-// app.listen(process.env.PORT, ()=>{
-//     console.log(`listening at ${process.env.PORT}`)
-// })
-app.listen('3001', ()=>{
-    console.log(`listening at 3001`)
+app.listen(process.env.PORT, ()=>{
+    console.log(`listening at ${process.env.PORT}`)
 })
+// app.listen('3001', ()=>{
+//     console.log(`listening at 3001`)
+// })
