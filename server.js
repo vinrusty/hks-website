@@ -209,6 +209,22 @@ app.get('/users/:role', async(req, res) => {
     }
 })
 
+app.get('/user-details/:id', async(req, res) => {
+    const {id} = req.params
+    try{
+        const fetchDetails = await PersonalDetail.findOne({phone: id})
+        if(fetchDetails.name){
+            res.json(fetchDetails)
+        }
+        else{
+            res.status(400).json('No user found')
+        }
+    }
+    catch(err){
+        res.status(400).json('No user found')
+    }
+})
+
 app.get('/list-of-members', async(req, res) => {
     try{
         const fetchedMember = await Member.find({})
