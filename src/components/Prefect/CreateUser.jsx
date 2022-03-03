@@ -31,7 +31,7 @@ function CreateUser({url, id, role}) {
     const [phone, setPhone] = useState('')
     const [userid, setUserid] = useState('')
     const [password, setPassword] = useState('')
-    const [prefect, setPrefect] = useState({})
+    const [prefect, setPrefect] = useState([])
     const toast = useToast()
 
     const handleNameChange = (event) => {

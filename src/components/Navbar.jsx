@@ -5,7 +5,7 @@ import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import {Drawer,DrawerBody,DrawerFooter,DrawerHeader,DrawerOverlay,DrawerContent,DrawerCloseButton} from "@chakra-ui/react"
 import axios from 'axios';
 
-function Navbar({url,user, loadUser}) {
+function Navbar({url, user, loadUser}) {
 
     const [islargerthan600] = useMediaQuery('(min-width:600px)')
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -32,6 +32,7 @@ function Navbar({url,user, loadUser}) {
         <div>
             <Flex width='100%' height='60px' bgGradient='linear(to-l, #7928CA, #FF0080)' alignItems='center' justifyContent='center' padding='2em' overflowY='hidden'>
                 <img src='/images/logo.png' alt='sangha logo' style={{width:'60px'}} />
+                <Text color='#FFF' fontSize={islargerthan600 ? '2xl':'md'} padding={islargerthan600 ? '2rem' : '1rem'}>Welcome! {user.name}</Text>
                 <Flex marginLeft='auto' alignItems='center'>
                 <Box as={NavLink} to='/dashboard'>
                     {/* <Text fontSize={islargerthan600 ? 'xl':'1em'} m={3} color='white'>Home</Text> */}

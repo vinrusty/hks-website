@@ -17,29 +17,29 @@ function Prefect({id, role}) {
               {
                   role === 'manager' ?
                 <Flex as={Link} to='/create-prefect' alignItems='center' justifyContent='center' bg='#DCE1E9' height='250px' borderRadius='10px'  boxShadow='md'>
-                    <Text fontSize={islargerthan600 ? '2xl':'1xl'}>
+                    <Text className='text-border'  fontSize={islargerthan600 ? '2xl':'1xl'}>
                         Prefect Create User
                     </Text>
                 </Flex>
                   :
                   <Flex alignItems='center' justifyContent='center' bg='#DCE1E9' height='250px' borderRadius='10px'  boxShadow='md'>
-                    <Text fontSize={islargerthan600 ? '2xl':'1xl'}>
+                    <Text className='text-border'  fontSize={islargerthan600 ? '2xl':'1xl'}>
                         Punya Smarane list
                     </Text>
                   </Flex>
               }
                 <Flex as={Link} to='/prefect/monthly-accounts' alignItems='center' justifyContent='center' bg='#DCE1E9' height='250px' borderRadius='10px' boxShadow='md'>
-                    <Text fontSize={islargerthan600 ? '2xl':'1xl'}>
+                    <Text className='text-border'  fontSize={islargerthan600 ? '2xl':'1xl'}>
                         Prefect Monthly Accounts
                     </Text>
                 </Flex>
                 <Flex as={Link} to='/prefect/hostel-students' alignItems='center' justifyContent='center' bg='#DCE1E9' height='250px' borderRadius='10px' boxShadow='md'>
-                    <Text fontSize={islargerthan600 ? '2xl':'1xl'}>
+                    <Text className='text-border' fontSize={islargerthan600 ? '2xl':'1xl'}>
                         Hostel Students
                     </Text>
                 </Flex>
                 <Flex as={Link} to='/prefect/ration-list' alignItems='center' justifyContent='center' bg='#DCE1E9' height='250px' borderRadius='10px' boxShadow='md'>
-                    <Text fontSize={islargerthan600 ? '2xl':'1xl'}>
+                    <Text className='text-border'  fontSize={islargerthan600 ? '2xl':'1xl'}>
                         Ration List
                     </Text>
                 </Flex>

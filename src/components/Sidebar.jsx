@@ -19,16 +19,16 @@ function Sidebar({id, role}) {
             {
               role === 'manager' ?
               <>
-              <Box as={NavLink} to={`/dashboard/${id}`} mt={6}  height="50px" cursor='pointer'  width="95%" borderRadius={5}>
+              <Box className='sidebar-box' as={NavLink} activeClassName='sidebar-active' to={`/dashboard/${id}`} mt={6}  height="50px" cursor='pointer'  width="95%" borderRadius={5}>
               <Text m={2} fontSize='xl' fontWeight='bold' color='#FFF'>Membership</Text>
               </Box>
-              <Box as={NavLink} mt={2} to='/prefect' height='50px' cursor='pointer'  width="95%" borderRadius={5}>
+              <Box className='sidebar-box' as={NavLink} activeClassName='sidebar-active' mt={2} to='/prefect' height='50px' cursor='pointer'  width="95%" borderRadius={5}>
               <Text m={2} fontSize='xl' fontWeight='bold' color='#FFF'>Prefect</Text>
               </Box>
-              <Box as={NavLink} to='/students' height='50px' cursor='pointer' mt={2} width="95%"  borderRadius={5}>
+              <Box className='sidebar-box' as={NavLink} activeClassName='sidebar-active' to='/students' height='50px' cursor='pointer' mt={2} width="95%"  borderRadius={5}>
               <Text m={2} fontSize='xl' fontWeight='bold' color='#FFF'>Students</Text>
               </Box>
-              <Box as={NavLink} to='/junior-prefect' height='50px' cursor='pointer' mt={2} width="95%"  borderRadius={5}>
+              <Box className='sidebar-box' as={NavLink} activeClassName='sidebar-active' to='/junior-prefect' height='50px' cursor='pointer' mt={2} width="95%"  borderRadius={5}>
               <Text m={2} fontSize='xl' fontWeight='bold' color='#FFF'>Junior Prefect</Text>
               </Box>
               </>
@@ -36,22 +36,22 @@ function Sidebar({id, role}) {
               (
                 role === 'prefect' ? 
                 <>
-                <Box as={NavLink} mt={2} to='/prefect' height='50px' cursor='pointer'  width="95%" borderRadius={5}>
+                <Box className='sidebar-box' as={NavLink} activeClassName='sidebar-active' mt={2} to='/prefect' height='50px' cursor='pointer'  width="95%" borderRadius={5}>
                 <Text m={2} fontSize='xl' fontWeight='bold' color='#FFF'>Prefect</Text>
                 </Box>
-                <Box as={NavLink} to='/students' height='50px' cursor='pointer' mt={2} width="95%"  borderRadius={5}>
+                <Box className='sidebar-box' as={NavLink} activeClassName='sidebar-active' to='/students' height='50px' cursor='pointer' mt={2} width="95%"  borderRadius={5}>
                 <Text m={2} fontSize='xl' fontWeight='bold' color='#FFF'>Students</Text>
                 </Box>
-                <Box as={NavLink} to='/junior-prefect' height='50px' cursor='pointer' mt={2} width="95%"  borderRadius={5}>
+                <Box className='sidebar-box' as={NavLink} activeClassName='sidebar-active' to='/junior-prefect' height='50px' cursor='pointer' mt={2} width="95%"  borderRadius={5}>
                 <Text m={2} fontSize='xl' fontWeight='bold' color='#FFF'>Junior Prefect</Text>
                 </Box>
                 </>
                 :
                <>
-                <Box as={NavLink} to='/students' height='50px' cursor='pointer' mt={2} width="95%"  borderRadius={5}>
+                <Box className='sidebar-box' as={NavLink} activeClassName='sidebar-active' to='/students' height='50px' cursor='pointer' mt={2} width="95%"  borderRadius={5}>
                 <Text m={2} fontSize='xl' fontWeight='bold' color='#FFF'>Students</Text>
                 </Box>
-                <Box as={NavLink} to='/junior-prefect' height='50px' cursor='pointer' mt={2} width="95%"  borderRadius={5}>
+                <Box className='sidebar-box' as={NavLink} activeClassName='sidebar-active' to='/junior-prefect' height='50px' cursor='pointer' mt={2} width="95%"  borderRadius={5}>
                 <Text m={2} fontSize='xl' fontWeight='bold' color='#FFF'>Junior Prefect</Text>
                 </Box>
                </>

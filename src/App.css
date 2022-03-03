@@ -43,6 +43,43 @@ body{
   /* padding: 1rem; */
   border: 1px solid black;
 }
+.sidebar-box{
+  transition: all 1s ease;
+}
+.sidebar-active{
+  background: linear-gradient(45deg, skyblue, purple, blue);
+}
+.sidebar-box:hover{
+ background: linear-gradient(45deg, skyblue, purple, blue);
+}
+.student-image{
+  width: 250px;
+}
+.student-table{
+  padding: 2rem;
+  width: 100%;
+  background: white;
+  margin-top: 10px;
+}
+.student-details-list>li{
+  padding: 0.5rem;
+  list-style-type: none;
+  font-size: 1.2rem;
+  border-bottom: 1px solid gray;
+  border-right: 1px solid gray;
+}
+.student-details-list-2>li{
+  padding: 0.5rem;
+  list-style-type: none;
+  text-align: left;
+  font-size: 1.2rem;
+  border-bottom: 1px solid gray;
+}
+.text-border{
+  border-bottom: 4px solid transparent;
+  border-image: linear-gradient(to right, red, blue);
+  border-image-slice: 1;
+}
 @media screen and (max-width:600px){
   .app{
     overflow-x: hidden;
